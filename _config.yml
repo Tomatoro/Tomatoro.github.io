@@ -51,7 +51,9 @@ highlight:
 index_generator:
   path: ''
   per_page: 10
-  order_by: -date
+  order_by:
+    top: -1
+    date: -1
   
 # Category & Tag
 default_category: uncategorized
@@ -101,7 +103,9 @@ markdown:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/Tomatoro/Tomatoro.github.io.git
+  repo: 
+    github: https://github.com/Tomatoro/Tomatoro.github.io.git
+    coding: https://dev.tencent.com/u/Tomatoro/p/Tomatoro.coding.me
   branch: master
   
 # hexo-generator-searchdb@1.0.8

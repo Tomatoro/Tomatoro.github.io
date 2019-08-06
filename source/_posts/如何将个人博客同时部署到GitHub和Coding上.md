@@ -1,0 +1,131 @@
+---
+title: 如何将个人博客同时部署到GitHub和Coding上
+author: Tomatoro
+comments: true
+tags: Blog
+top: 0
+date: 2019-08-05 11:46:32
+---
+
+## 前言
+
+> 之前我们把hexo托管在github，但是毕竟github是国外的，访问速度上还是有点慢，所以想也部署一套在国内的托管平台，下面给大家推荐一个国内代码托管的平台Coding。
+
+## 可以学到什么
+
+> 通过这篇文章，我们可以将我们的个人博客同时部署在国内和国外两个节点上。这样，如果是国内访问博客，会自动采用国内的节点，实现快速访问。如果是国外访问博客，便会采用国外的节点，以保证连接的可实现。
+
+<!-- more --> 
+
+## 正文
+
+
+
+### _config.yml配置
+
+* * *
+
+想要同时部署到2个平台，就要修改博客根目录下面的_config.yml文件中的deploy如下
+根据Hexo官方文档需要修改成下面的形式
+
+```
+deploy:
+  type: git
+  repo:
+    github: <repository url>
+    coding: <repository url>
+    branch: [branch]
+
+```
+
+比如我这样
+![_config.yml.png](https://upload-images.jianshu.io/upload_images/10775147-538501cd9108120c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+我这边提交采用的SSH密钥，这个方法有个好处，提交的时候不用输入用户名和密码。如果你习惯用http的方式，只要将地址改成相应的http地址即可。
+
+### coding上创建一个新项目
+
+* * *
+
+这里只介绍coding上面如何创建项目，以及把本地hexo部署到coding上面，还不懂如何创建hexo的请看我之前的系类文章。首先我们创建一个项目，创建后进入项目的代码模块，获取到这个项目的ssh地址
+
+![image](//upload-images.jianshu.io/upload_images/1637925-3cbdade49c4ed7ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp)
+
+### 同步本地hexo到coding上
+
+* * *
+
+把获取到了ssh配置在上面的`_config.yml`文件中的`deploy`下，如果是第一次使用coding的话，需要设置SSH公钥，生成的方法可以参考[coding帮助中心](https://link.jianshu.com?t=https://coding.net/help/doc/git/ssh-key.html)
+如果你看过我第一篇文章，里面也有介绍如果如果生成，我这里直接使用之前部署github时已经生成的公钥。
+本地打开 `id_rsa.pub` 文件，复制其中全部内容，填写到`SSH_RSA公钥`key下的一栏，公钥名称可以随意起名字。完成后点击“添加”，然后输入密码或动态码即可添加完成。
+
+![image.png](https://upload-images.jianshu.io/upload_images/10775147-b518dae83e56ab03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+添加后，在`git bash`命令输入：
+
+```
+ssh -T git@git.coding.net
+
+```
+
+如果得到下面提示就表示公钥添加成功了：
+
+```
+Coding.net Tips : [Hello ! You've conected to Coding.net by SSH successfully! ]
+
+```
+
+最后使用部署命令就能把博客同步到coding上面：
+
+```
+hexo deploy -g
+
+```
+
+![image.png](https://upload-images.jianshu.io/upload_images/10775147-a47b8e8004424f2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### pages服务方式部署
+
+* * *
+
+部署博客方式有两种，第一种就是pages服务的方式，也推荐这种方式，因为可以绑定域名，而第二种演示的方式必须升级会员才能绑定自定义域名。pages方式也很简单
+
+分支选择master，因为前面配置的分支是master,因此开启之后，也需要是master。然后看起之后就可访问了。
+
+![image.png](https://upload-images.jianshu.io/upload_images/10775147-fa07b65e369bbd7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+**注意**：
+
+>1.  如果你的项目名称跟你`coding`的用户名一样，比如我的用户是叫`tengj`,博客项目名也叫`tengj` 那直接访问 `tengj.coding.me`就能访问博客，否则就要带上项目名：`tengj.coding.me/项目名` 才能访问推荐项目名跟用户名一样，这样就可以省略项目名了
+> 2. 这里需要将自定义域名填上你自己的域名就可以了
+> 3. SSL/TLS安全证书这里有个坑,就是如果你之前已经创建绑定过github的代码仓库,那么直接生成这个证书是生成不了的,他会显示失败的状态,需要过30分钟才可以再次申请。 所以到这一步的小伙伴，可以先把这一步空下来，继续网下看，会告诉该怎么操作才正确。
+
+
+
+### 个人域名绑定
+
+* * *
+
+我是在阿里上买的tomatoro.cn的这个域名，现在要实现国内的走coding，海外的走github，只要配置2个CNAME就行。域名解析如下：
+![image.png](https://upload-images.jianshu.io/upload_images/10775147-57cae09095c8bd65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/10775147-bc6e7b02314564eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![image.png](https://upload-images.jianshu.io/upload_images/10775147-9799ed507f7fc46c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+> **注意**：
+这里就说一下如果之前有设置过github的域名解析, 现在要再绑定一个coding的域名解析, 需要注意的点:
+在coding去申请 SSL/TLS安全证书之前,需要将图中框起来的两个域名先暂停, 然后, 我们再去申请 SSL/TLS安全证书, 一般只需要等几秒就成功了, 然后再把这两个域名解析驱动就可以了. 一定要注意啊, 我就是因为这个等了半个小时才能接着申请的.
+
+过几分钟后检测tomatoro.cn看到的解析是正确的，国内解析到Coding，国外解析到Github，如图：
+
+![image](//upload-images.jianshu.io/upload_images/1637925-1ebfff2f6332e1dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/909/format/webp)
+
+## 总结
+
+* * *
+
+到此为止，终于可以实现部署一次，github和coding两个同步都搞定了。访问速度也是唰唰唰的快，希望对还在搭建hexo独立博客的小伙伴有帮助。

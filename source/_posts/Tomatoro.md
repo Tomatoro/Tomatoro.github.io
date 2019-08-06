@@ -9,7 +9,7 @@ tags: Blog
 photos: [
         	["../img/404-bg.jpg"],
 		]
-top: ture
+top: 1
 ---
 
 ### 前言
