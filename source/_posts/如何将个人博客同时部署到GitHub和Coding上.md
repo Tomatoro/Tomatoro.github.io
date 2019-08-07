@@ -39,7 +39,7 @@ deploy:
 ```
 
 比如我这样
-![_config.yml.png](https://upload-images.jianshu.io/upload_images/10775147-538501cd9108120c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![_config.yml.png](/img/git1.jpg)
 
 
 我这边提交采用的SSH密钥，这个方法有个好处，提交的时候不用输入用户名和密码。如果你习惯用http的方式，只要将地址改成相应的http地址即可。
@@ -50,17 +50,15 @@ deploy:
 
 这里只介绍coding上面如何创建项目，以及把本地hexo部署到coding上面，还不懂如何创建hexo的请看我之前的系类文章。首先我们创建一个项目，创建后进入项目的代码模块，获取到这个项目的ssh地址
 
-![image](//upload-images.jianshu.io/upload_images/1637925-3cbdade49c4ed7ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp)
+![image](/img/git2.jpg)
 
 ### 同步本地hexo到coding上
 
 * * *
 
-把获取到了ssh配置在上面的`_config.yml`文件中的`deploy`下，如果是第一次使用coding的话，需要设置SSH公钥，生成的方法可以参考[coding帮助中心](https://link.jianshu.com?t=https://coding.net/help/doc/git/ssh-key.html)
-如果你看过我第一篇文章，里面也有介绍如果如果生成，我这里直接使用之前部署github时已经生成的公钥。
-本地打开 `id_rsa.pub` 文件，复制其中全部内容，填写到`SSH_RSA公钥`key下的一栏，公钥名称可以随意起名字。完成后点击“添加”，然后输入密码或动态码即可添加完成。
+把获取到了ssh配置在上面的`_config.yml`文件中的`deploy`下，本地打开 `id_rsa.pub` 文件，复制其中全部内容，填写到`SSH_RSA公钥`key下的一栏，公钥名称可以随意起名字。完成后点击“添加”，然后输入密码或动态码即可添加完成。
 
-![image.png](https://upload-images.jianshu.io/upload_images/10775147-b518dae83e56ab03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![tomatoro.cn](/img/git3.jpg)
 
 
 添加后，在`git bash`命令输入：
@@ -84,7 +82,7 @@ hexo deploy -g
 
 ```
 
-![image.png](https://upload-images.jianshu.io/upload_images/10775147-a47b8e8004424f2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![tomatoro.cn](/img/git4.jpg)
 
 ### pages服务方式部署
 
@@ -94,7 +92,7 @@ hexo deploy -g
 
 分支选择master，因为前面配置的分支是master,因此开启之后，也需要是master。然后看起之后就可访问了。
 
-![image.png](https://upload-images.jianshu.io/upload_images/10775147-fa07b65e369bbd7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![tomatoro.cn](/img/git5.jpg)
 
 
 **注意**：
@@ -110,11 +108,11 @@ hexo deploy -g
 * * *
 
 我是在阿里上买的tomatoro.cn的这个域名，现在要实现国内的走coding，海外的走github，只要配置2个CNAME就行。域名解析如下：
-![image.png](https://upload-images.jianshu.io/upload_images/10775147-57cae09095c8bd65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![image.png](https://upload-images.jianshu.io/upload_images/10775147-bc6e7b02314564eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![tomatoro.cn](/img/git6.jpg)
+![tomatoro.cn](/img/git7.jpg)
 
 
-![image.png](https://upload-images.jianshu.io/upload_images/10775147-9799ed507f7fc46c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![tomatoro.cn](/img/git8.jpg)
 
 > **注意**：
 这里就说一下如果之前有设置过github的域名解析, 现在要再绑定一个coding的域名解析, 需要注意的点:
@@ -122,7 +120,7 @@ hexo deploy -g
 
 过几分钟后检测tomatoro.cn看到的解析是正确的，国内解析到Coding，国外解析到Github，如图：
 
-![image](//upload-images.jianshu.io/upload_images/1637925-1ebfff2f6332e1dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/909/format/webp)
+![tomatoro.cn](/img/git10.jpg)
 
 ## 总结
 
