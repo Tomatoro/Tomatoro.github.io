@@ -13,41 +13,46 @@ date: 2019-08-06 16:05:22
 <!-- more -->
 
 ### 正文
-首先，要找到位于用户下的.ssh文件，直接：
-```
+首先，要找到位于用户下的`.ssh`文件，直接：
+```JS
 cd ~/.ssh
 ```
-然后, 需要设置全局的name和email(这里注意,哪个常用设置哪个,我是公司常用,就设置的公司的)
-```
+
+然后, 需要设置全局的`name`和`email`(这里注意,哪个常用设置哪个,我是公司常用,就设置的公司的)
+```JS
 git config --global user.name 'xxx'
 git config --global user.email 'xxx@curefun.com'
 ```
+
 接下来, 开始生成秘钥文件. 这里直接两个都生成一下
-```
+```JS
 ssh-keygen -t rsa -C 'xxx@curefun.com' // GitLab
 // Enter file in which to save the key (/Users/tomatoro/.ssh/id_rsa): id_rsa_gitlab
 ssh-keygen -t rsa -C 'tomatoro@163.com' // GitHub
 // Enter file in which to save the key (/Users/tomatoro/.ssh/id_rsa): id_rsa_github
 ```
-进入到.ssh文件下,找到id_rsa_gitlab.pub和id_rsa_github.pub 将里面的内容全部复制粘贴到github 和 gitlab 的SSHKEY上
+
+进入到`.ssh`文件下,找到`id_rsa_gitlab.pub`和`id_rsa_github.pub` 将里面的内容全部复制粘贴到`github` 和 `gitlab` 的`SSHKEY`上
 <img src="/img/ssh1.jpg" width="200px"/>
 ![image.png](/img/ssh2.jpg)
 > 这里名字随便起, 然后记得.pub文件里内容全部复制就好了. 完了之后点保存. gitlab同理.
 
 接下来就要将两个key在本地存储起来
-打开agent
-```
+打开`agent`
+```JS
 ssh-agent -s
 ssh-add ~/.ssh/id_rsa_github // 输入生成秘钥时设置的密码
 ssh-add ~/.ssh/id_rsa_gitlab // 输入生成秘钥时设置的密码
 ```
-然后需要一个config文件来管理这两个key,以让git知道分配给谁
-在.ssh目录下创建config文件
-```
+
+然后需要一个`config文件`来管理这两个key,以让git知道分配给谁
+在`.ssh`目录下创建`config文件`
+```JS
 touch ~/.ssh/config
 ```
-打开config编辑如下内容
-```
+
+打开`config`编辑如下内容
+```JS
 Host github.com // 不动
     HostName ssh.github.com // 不动
     User tomatoro@163.com // 你自己的github邮箱
@@ -62,15 +67,17 @@ Host 192.168.0.231 // 你们公司gitlab的ip地址
     IdentityFile ~/.ssh/id_rsa_gitlab // 不动
     Port 64222 // 你们公司gitlab的ip端口
 ```
-好了,到了这一步,设置就基本全部完成了,接下来只需要跟远端的SSH同步一下就OK了
+
+好了,到了这一步,设置就基本全部完成了,接下来只需要跟远端的`SSH`同步一下就OK了
 > 公司仓库下
-```
+```JS
 ssh -T git@192.168.0.231
 输入密码
 git clone ssh://git@192.168.0.231:64222/MLE/skillCenter.git
 ```
+
 > 个人仓库下
-```
+```JS
 git init // --local需要在有git仓库的情况下才可以执行
 git config —local user.name 'tomatoro'
 git config —local user.email 'tomatoro@163.com'
@@ -78,6 +85,7 @@ ssh -T git@github.com
 输入密码
 git clone ssh://git@github.com:443/Tomatoro/TypeScript-study.git
 ```
+
 至此,就全部结束了. 想想我在搞这个东西的时候遇到的坑,现在都觉得好恶心. 整整弄了一下午, 希望对后来者有些许帮助吧.
 全部原创,欢迎转载!转载请注明出处.谢谢!
 

@@ -17,19 +17,19 @@ date: 2019-08-27 11:37:19
 -----
 ### 1. 问题
 
-由于 JavaScript 的动态特性，对象可以有区别很大的嵌套对象结构。
+由于 `JavaScript` 的动态特性，对象可以有区别很大的嵌套对象结构。
 
 通常，你在以下情况下处理此类对象：
 
-*   获取远程 JSON 数据
+*   获取远程 `JSON` 数据
 *   使用配置对象
-*   具有 optional 属性
+*   具有 `optional` 属性
 
 虽然这为对象提供了支持不同结构数据的灵活性，但是在访问这些对象的属性时会增加复杂性。
 
 `bigObject` 在运行时可以有不同的属性集：
 
-```
+```JS
 // One version of bigObject
 const bigObject = {
   // ...
@@ -54,7 +54,7 @@ const bigObject = {
 
 因此，你必须手动检查属性是否存在：
 
-```
+```JS
 // Later
 if (bigObject && 
     bigObject.prop1 != null && 
@@ -66,7 +66,7 @@ if (bigObject &&
 
 这会产生很多样板代码。如果不需要写这些代码那就太好了。
 
-让我们看看 optional chaining 如何解决这个问题，并减少样板条件。
+让我们看看 `optional chaining` 如何解决这个问题，并减少样板条件。
 
 ------------
 ### 2. 轻松的深入访问属性
@@ -75,7 +75,7 @@ if (bigObject &&
 
 `movieSmall` 对象只包含 `title`，而 `movieFull` 包含完整的属性集：
 
-```
+```JS
 const movieSmall = {
   title: 'Heat'
 };
@@ -90,7 +90,7 @@ const movieFull = {
 
 让我们写一个获取导演名字的函数。请记住，`director` 属性可能会不存在：
 
-```
+```JS
 function getDirector(movie) {
   if (movie.director != null) {
     return movie.director.name;
@@ -104,9 +104,9 @@ getDirector(movieFull);  // => 'Ridley Scott'
 
 `if (movie.director) {...}` 条件用于验证 `director` 属性是否已定义。如果没有这个预防措施，在访问`movieSmall` 对象 `director` 的时候，JavaScript 会抛出错误 `TypeError: Cannot read property 'name' of undefined`。
 
-这是使用新的 optional chaining 功能的正确位置，并删除 `movie.director` 的存在验证。新版本的`getDirector()`看起来要短得多：
+这是使用新的 `optional chaining` 功能的正确位置，并删除 `movie.director` 的存在验证。新版本的`getDirector()`看起来要短得多：
 
-```
+```JS
 function getDirector(movie) {
   return movie.director?.name;
 }
@@ -116,9 +116,9 @@ getDirector(movieFull);  // => 'Ridley Scott'
 
 ```
 
-在表达式 `movie.director?.name` 中你可以找到 `?.`： optional chaining 运算符。
+在表达式 `movie.director?.name` 中你可以找到 `?.`： `optional chaining 运算符`。
 
-在 `movieSmall` 的情况下，如果属性 `director` 丢失了。那么 `movie.director?.name` 的计算结果为 `undefined`。 optional chaining 运算符可防止抛出 `TypeError:Cannot read property 'name' of undefined`。
+在 `movieSmall` 的情况下，如果属性 `director` 丢失了。那么 `movie.director?.name` 的计算结果为 `undefined`。 `optional chaining 运算符`可防止抛出 `TypeError:Cannot read property 'name' of undefined`。
 
 相反，在 `movieFull` 的情况下，属性 `director` 可用。 `movie.director?.name` 的值为 `'Ridley Scott'`.。
 
@@ -139,11 +139,11 @@ if (movie.director != null) {
 
 ```
 
-`?.` 通过减少 2 行代码简化了 `getDirector()` 函数。这就是我喜欢 optional chaining 的原因。
+`?.` 通过减少 2 行代码简化了 `getDirector()` 函数。这就是我喜欢 `optional chaining` 的原因。
 
 ### 2.1 数组项
 
-但是 optional chaining 功能可以做更多的事情。你可以在同一表达式中使用多个 optional chaining 运算符。甚至可以使用它来安全地访问数组项目！
+但是 `optional chaining` 功能可以做更多的事情。你可以在同一表达式中使用多个 `optional chaining 运算符`。甚至可以使用它来安全地访问数组项目！
 
 接下来的任务是编写一个返回电影主角名字的函数。
 
@@ -163,7 +163,7 @@ getLeadingActor(movieFull);  // => 'Harrison Ford'
 
 `if (movie.actors && movies.actors.length > 0) {...}` 条件需要确保 `movie` 中包含 `actors` 属性，并且此属性至少有一个 actor。
 
-通过使用 optional chaining，此任务很容易解决：
+通过使用 `optional chaining`，此任务很容易解决：
 
 ```
 function getLeadingActor(movie) {
@@ -193,7 +193,7 @@ value   ?? 'Nothing'; // => 'Hello'
 
 ```
 
-当评估为 `undefined` 时，Nullish 合并可以通过默认值来改进 optional chaining。
+当评估为 `undefined` 时，Nullish 合并可以通过默认值来改进 `optional chaining`。
 
 例如，当 movie 对象中没有 actor 时，让我们改变 `getLeading()` 函数返回 `"Unknown actor"`：
 
@@ -210,7 +210,7 @@ getLeadingActor(movieFull);  // => 'Harrison Ford'
 ----------------------------
 ### 4. optional chaining 的 3 种形式
 
-可以用以下 3 种形式使用 optional chaining 。
+可以用以下 3 种形式使用 `optional chaining` 。
 
 第一种形式 `object?.property` 用于访问静态属性：
 
@@ -250,7 +250,7 @@ const value = object.maybeUndefinedProp?.maybeNull()?.[propName];
 --------------------------
 ### 5. 短路：停止于 _null/undefined_
 
-有关 optional chaining 运算符的有趣之处在于，只要在其左侧 `leftHandSide?.rightHandSide` 中遇到无效值，右侧访问器的评估就会停止。这称为短路。
+有关 `optional chaining 运算符`的有趣之处在于，只要在其左侧 `leftHandSide?.rightHandSide` 中遇到无效值，右侧访问器的评估就会停止。这称为短路。
 
 我们来看一个例子：
 
@@ -263,18 +263,18 @@ index;              // => 0
 
 ```
 
-`nothing` 保持一个 nullish 值，因此 optional chaining 评估为 `undefined` ，并跳过右侧访问器的评估。因为 `index` 编号不会增加。
+`nothing` 保持一个 nullish 值，因此 `optional chaining` 评估为 `undefined` ，并跳过右侧访问器的评估。因为 `index` 编号不会增加。
 
 -------------------------
 ### 6. 何时使用 optional chaining
 
-一定要克制使用 optional chaining 操作符访问任何类型属性的冲动：这将会导致误导使用。下一节将介绍何时正确使用它。
+一定要克制使用 `optional chaining` 操作符访问任何类型属性的冲动：这将会导致误导使用。下一节将介绍何时正确使用它。
 
 ### 6.1 访问可能无效的属性
 
 `?.` 必须只在可能无效的属性附近使用：`maybeNullish?.prop`。在其他情况下，使用旧的属性访问器：`.property` 或 `[propExpression]`。
 
-回想一下 movie 对象。查看表达式 `movie.director?.name`，因 为`director` 可以是 `undefined`，在`director`属性附近使用 optional chaining 运算符是正确的。
+回想一下 movie 对象。查看表达式 `movie.director?.name`，因 为`director` 可以是 `undefined`，在`director`属性附近使用 `optional chaining 运算符`是正确的。
 
 相反，使用 `?.` 来访问电影标题是没有意义的：`movie?.title`。movie 对象不会是无效的。
 
@@ -300,7 +300,7 @@ function logMovie(movie) {
 
 以下函数 `hasPadding()` 接受带有可选 `padding` 属性的样式对象。 `padding` 具有可选属性`left`、`top`、`right`、`bottom`。
 
-下面尝试使用 optional chaining 运算符：
+下面尝试使用 `optional chaining 运算符`：
 
 ```
 function hasPadding({ padding }) {
@@ -317,7 +317,7 @@ hasPadding({ padding: { right: 10 }}); // => true
 
 ```
 
-虽然函数正确地确定元素是否具有填充，但是对于每个属性都使用 optional chaining 是非常困难的。
+虽然函数正确地确定元素是否具有填充，但是对于每个属性都使用 `optional chaining` 是非常困难的。
 
 更好的方法是使用对象扩展运算符将填充对象默认为零值：
 
@@ -344,9 +344,9 @@ hasPadding({ padding: { right: 10 }}); // => true
 -----------
 ### 7. 为什么我喜欢它？
 
-我喜欢 optional chaining 运算符，因为它允许从嵌套对象轻松访问属性。它可以减少通过编写样板文件来验证来自访问器链的每个属性访问器上无效值的工作。
+我喜欢 `optional chaining 运算符`，因为它允许从嵌套对象轻松访问属性。它可以减少通过编写样板文件来验证来自访问器链的每个属性访问器上无效值的工作。
 
-当 optional chaining 与无效合并运算符组合时，你可以获得更好的结果，能够更轻松地处理默认值。
+当 `optional chaining` 与无效合并运算符组合时，你可以获得更好的结果，能够更轻松地处理默认值。
 
 > 转载信息
 > 作者：Dmitri Pavlutin
