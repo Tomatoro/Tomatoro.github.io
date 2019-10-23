@@ -39,7 +39,7 @@ deploy:
 ```
 
 比如我这样
-![_config.yml.png](/img/git1.jpg)
+![_config.yml.png](https://tva1.sinaimg.cn/large/006y8mN6ly1g884gjg1q8j30uq07m0z5.jpg)
 
 
 我这边提交采用的SSH密钥，这个方法有个好处，提交的时候不用输入用户名和密码。如果你习惯用http的方式，只要将地址改成相应的http地址即可。
@@ -50,7 +50,7 @@ deploy:
 
 这里只介绍coding上面如何创建项目，以及把本地hexo部署到coding上面，还不懂如何创建hexo的请看我之前的系类文章。首先我们创建一个项目，创建后进入项目的代码模块，获取到这个项目的ssh地址
 
-![image](/img/git2.jpg)
+![image](https://tva1.sinaimg.cn/large/006y8mN6ly1g884gm1ziwj31go0u0k9s.jpg)
 
 ### 同步本地hexo到coding上
 
@@ -58,7 +58,7 @@ deploy:
 
 把获取到了ssh配置在上面的`_config.yml`文件中的`deploy`下，本地打开 `id_rsa.pub` 文件，复制其中全部内容，填写到`SSH_RSA公钥`key下的一栏，公钥名称可以随意起名字。完成后点击“添加”，然后输入密码或动态码即可添加完成。
 
-![tomatoro.cn](/img/git3.jpg)
+![tomatoro.cn](https://tva1.sinaimg.cn/large/006y8mN6ly1g884unl6s2j31g80q64qp.jpg)
 
 
 添加后，在`git bash`命令输入：
@@ -79,7 +79,7 @@ Coding.net Tips : [Hello ! You've conected to Coding.net by SSH successfully! ]
 hexo deploy -g
 ```
 
-![tomatoro.cn](/img/git4.jpg)
+![tomatoro.cn](https://tva1.sinaimg.cn/large/006y8mN6ly1g884gpwjeej31zy0u0e6o.jpg)
 
 ### pages服务方式部署
 
@@ -89,8 +89,7 @@ hexo deploy -g
 
 分支选择master，因为前面配置的分支是master,因此开启之后，也需要是master。然后看起之后就可访问了。
 
-![tomatoro.cn](/img/git5.jpg)
-
+![tomatoro.cn](https://tva1.sinaimg.cn/large/006y8mN6ly1g884usvekgj31vo0u0tuz.jpg)
 
 **注意**：
 
@@ -105,9 +104,9 @@ hexo deploy -g
 * * *
 
 我是在阿里上买的tomatoro.cn的这个域名，现在要实现国内的走coding，海外的走github，只要配置2个CNAME就行。域名解析如下：
-![tomatoro.cn](/img/git6.jpg)
-![tomatoro.cn](/img/git7.jpg)
-![tomatoro.cn](/img/git8.jpg)
+![tomatoro.cn](https://tva1.sinaimg.cn/large/006y8mN6ly1g884gtkii2j310q0ne45d.jpg)
+![tomatoro.cn](https://tva1.sinaimg.cn/large/006y8mN6ly1g884gykdjbj310m0nowlf.jpg)
+![tomatoro.cn](https://tva1.sinaimg.cn/large/006y8mN6ly1g884wv3630j327i0ae10h.jpg)
 
 > **注意**：
 这里就说一下如果之前有设置过github的域名解析, 现在要再绑定一个coding的域名解析, 需要注意的点:
@@ -115,7 +114,7 @@ hexo deploy -g
 
 过几分钟后检测`tomatoro.cn`看到的解析是正确的，国内解析到Coding，国外解析到Github，如图：
 
-![tomatoro.cn](/img/git10.jpg)
+![tomatoro.cn](https://tva1.sinaimg.cn/large/006y8mN6ly1g884hcq1f3j315k0u0kjl.jpg)
 
 ## 总结
 

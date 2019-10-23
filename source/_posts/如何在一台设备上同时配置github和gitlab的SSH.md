@@ -33,8 +33,10 @@ ssh-keygen -t rsa -C 'tomatoro@163.com' // GitHub
 ```
 
 进入到`.ssh`文件下,找到`id_rsa_gitlab.pub`和`id_rsa_github.pub` 将里面的内容全部复制粘贴到`github` 和 `gitlab` 的`SSHKEY`上
-<img src="/img/ssh1.jpg" width="200px"/>
-![image.png](/img/ssh2.jpg)
+<img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g884j9tshmj30fi0wck24.jpg" width="200px"/>
+
+![image.png](https://tva1.sinaimg.cn/large/006y8mN6ly1g884jetao4j31lq0o0h96.jpg)
+
 > 这里名字随便起, 然后记得.pub文件里内容全部复制就好了. 完了之后点保存. gitlab同理.
 
 接下来就要将两个key在本地存储起来

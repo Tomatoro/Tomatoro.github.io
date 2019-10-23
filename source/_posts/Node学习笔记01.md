@@ -42,7 +42,7 @@ http.createServer((req,res)=>{
 
 可以使用 node http.js 命令来执行这段代码，通过浏览器来访问 http://127.0.0.1:8000 或者 http://localhost:800 来查看结果。
 
-![](../img/node/node01/node-1.jpg)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g87z7owtx6j310i0903zc.jpg)
 
 一个由 Nodejs 的 http 服务提供的 hello world 跑起来了，简洁快速吧。接下来再来实现一个前端工作中与服务端最紧密的内容来看看 Nodejs 的魅力，数据接口。
 
@@ -69,7 +69,7 @@ http.createServer((req,res)=>{
 
 上例子中，先确定了一个数据模型 data，内部一共有三个字段。这里的数据模型就是前端开发前与后端所定义的返回格式，最终前端要拿到这个 JSON 格式的数据在客户端进行处理。代码逻辑相比于 Hello World，规定了返回的数据格式，以及设定了返回请求的文本类型为 application/json，然后调用 res.end 返回到客户端。
 
-![](../img/node/node01/node-2.jpg)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g87z82p4bsj310e0e4q4t.jpg)
 
 可以继续使用浏览器发起 http 请求来查看结果，一个简单且熟悉的 JSON 数据接口已经完成了。你可以按照前端最常用的调用方式，如 ajax 或者 axios 来请求接口来在你的前端项目使用它。
 
@@ -125,11 +125,11 @@ http.creatServer((req,res)=>{
 
 上面的例子中，新使用 Nodejs 另一个自带的模块 url，url 模块顾名思义是一个处理 href 的库，它将 href 拆分成各个子内容，同时为了能处理客户端带来的 userId 参数还使用了自带的 querystring 模块，它可以将链接上问号后的 query 参数获取到，以便服务端代码能使用他们，他们均属于工具库，下面看看官方对于 URL 模块将 href 拆分的颗粒度图，清晰的了解一下一个请求链接，可以被拆分成什么颗粒度。
 
-![](../img/node/node01/node-3.png)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g87z880x83j310a0jitgk.jpg)
 
 实例中的源码简单解析一下，当服务接收到请求时，先判断请求的 api 名称是不是事先约定好的 / api/search/data，判断通过后，将前端传递在链接上的参数 userId 获取到，处理后插入到返回的 json 数据中，即可通过 res.end 来下发数据，如果路径判断失败，则返回 404 的状态码，并且进入 Notfund 页面，
 
-![](../img/node/node01/node-4.png)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g87z8bafvgj310i0g8n5m.jpg)
 
 一个规范的接口已经开发完成了，简单总结一下，上面以渐进式的方式了解了 Nodejs 如何给前端来提供一个规范化的 http 接口，了解了服务端的 JavaScript 所具备的能力，接下来再从另一个前端工程师比较少接触的内容——文件操作，来进一步了解 Nodejs。
 
@@ -180,13 +180,13 @@ console.log('sync finish');
 
 在上面的例子中，要求是一次读取两个文件，两个文件之间并没有相关依赖性，所以这种 场景下我们更希望他们各做各的，无需去等。所以没有必要像上面同步的方式，等第一个结束再进入第二个的读取，所以使用异步方式更合适。  
 
-![](../img/node/node01/node-5.png)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g87z8gocjkj310o0datek.jpg)
 
 从上面的执行结果也可以看出来，fs.readFile 这个异步回调操作均在三个同步代码 console 的后面，并没有像同步等待读操作的结束。
 
 下面来个图看看这个同步 API 和异步 API 有何异同。
 
-![](../img/node/node01/node-6.png)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g87z8jvg66j310k0ng49g.jpg)
 
 图片上半部分是异步读文件，可以看出来，读的操作可以理解为同时刻执行的。
 
@@ -232,7 +232,7 @@ fs.writeFile('./test5.md', body2, (err) => {
 
 这是写文件的结果，这时候你的本地会多出两个文件 test4.md 和 test5.md 出来。
 
-![](../img/node/node01/node-7.png)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g87z8ngphij310i0cmwkq.jpg)
 
 ##### 3. 其他文件操作
 
