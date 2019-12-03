@@ -2,14 +2,14 @@
 title: Tomatoro
 author: Tomatoro
 catalog: true
-date: 2019-08-01 00:00:00
-subtitle: 'My First Blog'
+subtitle: My First Blog
 comments: true
 tags: Blog
-photos: [
-        	["../img/404-bg.jpg"],
-		]
+photos:
+  - - ../img/404-bg.jpg
 top: 1
+abbrlink: be5a804b
+date: 2019-08-01 00:00:00
 ---
 
 ### 前言

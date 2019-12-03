@@ -2,8 +2,11 @@
 title: Notion绑定域名-你的笔记就是你的博客!
 author: Tomatoro
 comments: true
-tags: [Blog,Notion]
+tags:
+  - Blog
+  - Notion
 top: 0
+abbrlink: c60ac904
 date: 2019-11-06 16:04:28
 ---
 
@@ -55,7 +58,7 @@ Big thanks to [Mayne](http://github.com/mayneyao) for writing this worker script
 ![](https://tva1.sinaimg.cn/large/006y8mN6ly1g8odnqlau3j31lg0s04cz.jpg)
 
 Once you have followed those steps, copy this script into that new file. 
-
+``` JS
     const MY_DOMAIN = "example.com"
     const START_PAGE = "https://www.notion.so/link/to/your/public/page"
     
@@ -130,6 +133,7 @@ Once you have followed those steps, copy this script into that new file.
     
       return response
     }
+```
 
 现在，你已经添加了脚本，您需要更改顶部的两个const：
 
@@ -148,6 +152,4 @@ Once you have followed those steps, copy this script into that new file.
 
 到这里为止就大功告成了! 这时候你访问你自己的域名就可以看到notion的页面啦, 以后用notion写博客也可以使用自己的域名了, 可谓是相当酷炫了! 
 
-💎最后,附上第三步的视频教程, 这里有我的示例[tomatoro.space](https://tomatoro.space)
-
-[Kapture_2019-09-22_at_22-81ad9c05-efce-4d6e-864e-527c10ab5e04.35.09.mp4](
+💎最后,这里有我的示例[tomatoro.space](https://tomatoro.space)

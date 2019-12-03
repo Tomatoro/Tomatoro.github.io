@@ -2,8 +2,10 @@
 title: Git在团队中的最佳实践
 author: Tomatoro
 comments: true
-tags: [Git]
+tags:
+  - Git
 top: 0
+abbrlink: f33d987
 date: 2019-10-23 11:00:14
 ---
 

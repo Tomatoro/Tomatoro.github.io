@@ -2,8 +2,10 @@
 title: Git stash 暂存的操作
 author: Tomatoro
 comments: true
-tags: [Git]
+tags:
+  - Git
 top: 0
+abbrlink: '64676934'
 date: 2019-08-30 16:12:55
 ---
 

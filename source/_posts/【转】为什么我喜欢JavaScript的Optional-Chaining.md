@@ -2,8 +2,10 @@
 title: 【转】为什么我喜欢JavaScript的Optional Chaining
 author: Tomatoro
 comments: true
-tags: [ES6]
+tags:
+  - ES6
 top: 0
+abbrlink: fafa2f28
 date: 2019-08-27 11:37:19
 ---
 

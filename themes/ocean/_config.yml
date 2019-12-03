@@ -30,7 +30,7 @@ nav_text:
   post_next: Olde posts
 
 # fancybox
-fancybox: true
+fancybox: false
 
 # RSS
 feed:
@@ -63,3 +63,9 @@ gitalk:
   repo: Tomatoro.github.io # Repository name
   owner: Tomatoro # GitHub ID
   admin: Tomatoro # GitHub ID
+
+permalink: archives/:abbrlink.html
+permalink_defaults:
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hexƒ

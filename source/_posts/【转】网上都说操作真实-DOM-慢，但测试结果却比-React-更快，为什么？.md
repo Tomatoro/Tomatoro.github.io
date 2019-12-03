@@ -2,8 +2,10 @@
 title: 【转】网上都说操作真实 DOM 慢，但测试结果却比 React 更快，为什么？
 author: Tomatoro
 comments: true
-tags: [JavaScript]
+tags:
+  - JavaScript
 top: 0
+abbrlink: 3f0a5b42
 date: 2019-08-23 10:13:17
 ---
 

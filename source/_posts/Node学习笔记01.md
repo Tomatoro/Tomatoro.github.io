@@ -1,9 +1,11 @@
 ---
 author: Tomatoros
 title: Node学习笔记01
-tags: [Node]
+tags:
+  - Node
 top: 0
 comments: true
+abbrlink: d57ffb29
 date: 2019-09-05 18:45:22
 ---
 

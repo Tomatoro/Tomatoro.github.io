@@ -2,8 +2,10 @@
 title: Git worktree 的使用
 author: Tomatoro
 comments: true
-tags: [Git]
+tags:
+  - Git
 top: 0
+abbrlink: a2d3386
 date: 2019-08-30 16:23:59
 ---
 

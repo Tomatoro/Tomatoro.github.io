@@ -2,8 +2,10 @@
 title: Nginx常用命令
 author: Tomatoro
 comments: true
-tags: [Nginx]
+tags:
+  - Nginx
 top: 0
+abbrlink: 96d8af1a
 date: 2019-10-23 11:28:24
 ---
 
