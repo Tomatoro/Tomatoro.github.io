@@ -45,6 +45,7 @@ feed:
 
 # Local search
 search_text: 搜索
+show_count: true
 # Dependencies: https://github.com/flashlab/hexo-generator-search
 local_search:
   enable: true
