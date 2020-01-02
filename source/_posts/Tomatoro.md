@@ -6,7 +6,7 @@ subtitle: My First Blog
 comments: true
 tags: Blog
 photos:
-  - - ../img/404-bg.jpg
+  - - ../img/main-background.jpg
 top: 1
 abbrlink: be5a804b
 date: 2019-08-01 00:00:00
