@@ -201,11 +201,57 @@
 <p>你可能还没有留意到数组和对象的变更检测注意事项，或者你可能依赖了一个未被 Vue 的响应式系统追踪的状态。</p>
 <p>然而，如果你已经做到了上述的事项仍然发现在极少数的情况下需要手动强制更新，那么你可以通过 $forceUpdate 来做这件事。</p>
 <h3 id="通过-v-once-创建低开销的静态组件"><a href="#通过-v-once-创建低开销的静态组件" class="headerlink" title="通过 v-once 创建低开销的静态组件"></a>通过 v-once 创建低开销的静态组件</h3><p>渲染普通的 HTML 元素在 Vue 中是非常快速的，但有的时候你可能有一个组件，这个组件包含了大量静态内容。在这种情况下，你可以在根元素上添加 v-once 特性以确保这些内容只计算一次然后缓存起来,并不再更新. ( 正常情况下不会用到 )</p>
+<h3 id="过渡-transition"><a href="#过渡-transition" class="headerlink" title="过渡 transition"></a>过渡 transition</h3><p><strong>哪些组件/元素可以用?</strong></p>
+<ul>
+<li>条件渲染 (使用 <code>v-if</code>)</li>
+<li>条件展示 (使用 <code>v-show</code>)</li>
+<li>动态组件</li>
+<li>组件根节点</li>
+</ul>
+<p><strong>过渡类</strong></p>
+<ul>
+<li><code>v-enter</code>：定义进入过渡的开始状态。</li>
+<li><code>v-enter-active</code>：定义进入过渡生效时的状态。</li>
+<li><code>v-enter-to</code>: 定义进入过渡的结束状态。</li>
+<li><code>v-leave</code>: 定义离开过渡的开始状态。</li>
+<li><code>v-leave-active</code>：定义离开过渡生效时的状态。</li>
+<li><code>v-leave-to</code>: 定义离开过渡的结束状态。</li>
+</ul>
+<p>对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 <code>，则 `v-` 是这些类名的默认前缀。如果你使用了</code>，那么 <code>v-enter</code> 会替换为 <code>my-transition-enter</code>。</p>
+<p><strong>过渡模式</strong></p>
+<ul>
+<li><p><code>in-out</code>：新元素先进行过渡，完成之后当前元素过渡离开。</p>
+</li>
+<li><p><code>out-in</code>：当前元素先进行过渡，完成之后新元素过渡进入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition name=<span class="string">"fade"</span> mode=<span class="string">"out-in"</span>&gt; <span class="xml"><span class="comment">&lt;!-- ... the buttons ... --&gt;</span> <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>自定义过渡类名</strong></p>
+<ul>
+<li><p><code>enter-class</code></p>
+</li>
+<li><p><code>enter-active-class</code></p>
+</li>
+<li><p><code>enter-to-class</code></p>
+</li>
+<li><p><code>leave-class</code></p>
+</li>
+<li><p><code>leave-active-class</code></p>
+</li>
+<li><p><code>leave-to-class</code></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition</span><br><span class="line">  v-on:before-enter=<span class="string">"beforeEnter"</span></span><br><span class="line">  v-on:enter=<span class="string">"enter"</span></span><br><span class="line">  v-on:after-enter=<span class="string">"afterEnter"</span></span><br><span class="line">  v-on:enter-cancelled=<span class="string">"enterCancelled"</span></span><br><span class="line">  v-on:before-leave=<span class="string">"beforeLeave"</span></span><br><span class="line">  v-on:leave=<span class="string">"leave"</span></span><br><span class="line">  v-on:after-leave=<span class="string">"afterLeave"</span></span><br><span class="line">  v-on:leave-cancelled=<span class="string">"leaveCancelled"</span></span><br><span class="line">&gt;</span><br><span class="line">  &lt;!-- ... --&gt;</span><br><span class="line">&lt;<span class="regexp">/transition&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="渲染函数-amp-JSX"><a href="#渲染函数-amp-JSX" class="headerlink" title="渲染函数&amp;JSX"></a>渲染函数&amp;JSX</h3><p>感觉好菜啊!读到这里发现读完之后没有什么GET到的点,做个记录,之后再返回来细细品一下.👉🏻<a href="https://vuejs.bootcss.com/v2/guide/render-function.html" target="_blank" rel="noopener">link</a></p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>看到这里才发现新大陆👉🏻<a href="https://github.com/vuejs/awesome-vue#components--libraries" target="_blank" rel="noopener">link</a>, 以后要写一个自己的插件出来</p>
+<h3 id="Over"><a href="#Over" class="headerlink" title="Over"></a>Over</h3><p>前前后后花了将近一周,终于将Vue的文档重新过了一遍, 确实, 收获还是蛮多的. 在平常项目开发中, 有许多的东西并不会真切的用到, 但是知识储备还是必须的. 这样在项目中遇到问题之后, 会有自己的一个思路, 从而可以更快的追溯到问题的根源. 继续努力!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://tomatoro.cn/archives/3a867b5d.html" data-id="ck4whkxie0019e5mao7k7by7z"
+      <a data-url="http://tomatoro.cn/archives/3a867b5d.html" data-id="ck4z26oby001jqwmas04xpu57"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
