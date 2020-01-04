@@ -254,3 +254,72 @@ date: 2019-12-26 14:20:38
 ### 通过 v-once 创建低开销的静态组件
 
 渲染普通的 HTML 元素在 Vue 中是非常快速的，但有的时候你可能有一个组件，这个组件包含了大量静态内容。在这种情况下，你可以在根元素上添加 v-once 特性以确保这些内容只计算一次然后缓存起来,并不再更新. ( 正常情况下不会用到 )
+
+### 过渡 transition
+
+**哪些组件/元素可以用?**
+
+- 条件渲染 (使用 `v-if`)
+- 条件展示 (使用 `v-show`)
+- 动态组件
+- 组件根节点
+
+**过渡类**
+
+- `v-enter`：定义进入过渡的开始状态。
+- `v-enter-active`：定义进入过渡生效时的状态。
+- `v-enter-to`: 定义进入过渡的结束状态。
+- `v-leave`: 定义离开过渡的开始状态。
+- `v-leave-active`：定义离开过渡生效时的状态。
+- `v-leave-to`: 定义离开过渡的结束状态。
+
+对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 ``，则 `v-` 是这些类名的默认前缀。如果你使用了 ``，那么 `v-enter` 会替换为 `my-transition-enter`。
+
+**过渡模式**
+
+- `in-out`：新元素先进行过渡，完成之后当前元素过渡离开。
+
+- `out-in`：当前元素先进行过渡，完成之后新元素过渡进入。
+```JS
+  <transition name="fade" mode="out-in"> <!-- ... the buttons ... --> </transition>
+```
+**自定义过渡类名**
+
+- `enter-class`
+
+- `enter-active-class`
+
+- `enter-to-class`
+
+- `leave-class`
+
+- `leave-active-class`
+
+- `leave-to-class`
+
+```JS
+  <transition
+    v-on:before-enter="beforeEnter"
+    v-on:enter="enter"
+    v-on:after-enter="afterEnter"
+    v-on:enter-cancelled="enterCancelled"
+    v-on:before-leave="beforeLeave"
+    v-on:leave="leave"
+    v-on:after-leave="afterLeave"
+    v-on:leave-cancelled="leaveCancelled"
+  >
+    <!-- ... -->
+  </transition>
+```
+
+### 渲染函数&JSX
+
+感觉好菜啊!读到这里发现读完之后没有什么GET到的点,做个记录,之后再返回来细细品一下.👉🏻[link](https://vuejs.bootcss.com/v2/guide/render-function.html)
+
+### 插件
+
+看到这里才发现新大陆👉🏻[link](https://github.com/vuejs/awesome-vue#components--libraries), 以后要写一个自己的插件出来
+
+### Over
+
+前前后后花了将近一周,终于将Vue的文档重新过了一遍, 确实, 收获还是蛮多的. 在平常项目开发中, 有许多的东西并不会真切的用到, 但是知识储备还是必须的. 这样在项目中遇到问题之后, 会有自己的一个思路, 从而可以更快的追溯到问题的根源. 继续努力!
