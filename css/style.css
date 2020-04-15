@@ -2040,6 +2040,9 @@ pre .javascript .function {
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
+.vcomments {
+  margin-top: 3rem;
+}
 .macbook {
   position: relative;
 }
