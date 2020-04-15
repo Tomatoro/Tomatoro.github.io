@@ -76,6 +76,12 @@ valine:
   avatar: 'mp'
   pageSize: '10'
   placeholder: '请输入...'
+  visitor: true
+  comment_count: true
+leancloud_visitors:
+  enable: false
+  appid: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz'
+  appkey: 'MKI3gklnGb5sVCOEUmibUD6g'
 
 permalink: archives/:abbrlink.html
 permalink_defaults:
