@@ -58,12 +58,24 @@ local_search:
 
 # Gitalk
 gitalk:
-  enable: true # true
+  enable: false # true
   clientID: 2ba57164627d58effb38 # GitHub Application Client ID
   clientSecret: c6428a566b04c4219f3f91e06997f24cd00e7b8c # Client Secret
   repo: Tomatoro.github.io # Repository name
   owner: Tomatoro # GitHub ID
   admin: Tomatoro # GitHub ID
+
+# Valine
+valine:
+  enable: true
+  el: 'vcomments'
+  appId: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz'
+  appKey: 'MKI3gklnGb5sVCOEUmibUD6g'
+  notify: true # 邮箱推送
+  verify: true
+  avatar: 'mp'
+  pageSize: '10'
+  placeholder: '请输入...'
 
 permalink: archives/:abbrlink.html
 permalink_defaults:
