@@ -5,6 +5,8 @@
 写作空间: [tomatoro.space](https://tomatoro.space)
 
 ```bash
+# 安装Hexo
+npm install hexo-cli -g
 # 开启服务
 hexo server
 # 创建一篇文章

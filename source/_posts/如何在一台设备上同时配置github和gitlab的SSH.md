@@ -22,18 +22,22 @@ cd ~/.ssh
 然后, 需要设置全局的`name`和`email`(这里注意,哪个常用设置哪个,我是公司常用,就设置的公司的)
 ```JS
 git config --global user.name 'xxx'
-git config --global user.email 'xxx@curefun.com'
+git config --global user.email 'xxx@baijia.com'
 ```
 
 接下来, 开始生成秘钥文件. 这里直接两个都生成一下
 ```JS
-ssh-keygen -t rsa -C 'xxx@curefun.com' // GitLab
+ssh-keygen -t rsa -C 'xxx@bai'jia.com' // GitLab
 // Enter file in which to save the key (/Users/tomatoro/.ssh/id_rsa): id_rsa_gitlab
 ssh-keygen -t rsa -C 'tomatoro@163.com' // GitHub
 // Enter file in which to save the key (/Users/tomatoro/.ssh/id_rsa): id_rsa_github
 ```
 
 进入到`.ssh`文件下,找到`id_rsa_gitlab.pub`和`id_rsa_github.pub` 将里面的内容全部复制粘贴到`github` 和 `gitlab` 的`SSHKEY`上
+```JS
+cat id_rsa_gitlab.pub
+cat id_rsa_github.pub
+```
 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g884j9tshmj30fi0wck24.jpg" width="200px"/>
 
 ![image.png](https://tva1.sinaimg.cn/large/006y8mN6ly1g884jetao4j31lq0o0h96.jpg)
@@ -57,7 +61,7 @@ touch ~/.ssh/config
 打开`config`编辑如下内容
 ```JS
 Host github.com // 不动
-    HostName ssh.github.com // 不动
+    HostName github.com // 不动
     User tomatoro@163.com // 你自己的github邮箱
     PreferredAuthentications publickey // 不动
     IdentityFile ~/.ssh/id_rsa_github // 不动
@@ -66,9 +70,9 @@ Host github.com // 不动
 
 Host 192.168.0.231 // 你们公司gitlab的ip地址
     HostName 192.168.0.231 //与Host保持一致
-    User xxx@curefun.com // 你gitlab的邮箱
+    User xxx@baijia.com // 你gitlab的邮箱
     IdentityFile ~/.ssh/id_rsa_gitlab // 不动
-    Port 64222 // 你们公司gitlab的ip端口
+    Port 64222 // 你们公司gitlab的ip端口 没有的话可以不写
 ```
 
 好了,到了这一步,设置就基本全部完成了,接下来只需要跟远端的`SSH`同步一下就OK了
@@ -88,6 +92,10 @@ ssh -T git@github.com
 输入密码
 git clone ssh://git@github.com:443/Tomatoro/TypeScript-study.git
 ```
+> 整个流程下来就是这个样子
+
+![image.png](https://tva1.sinaimg.cn/large/008i3skNly1gqb16ynad2j30wb0u0k8u.jpg)
+![image.png](https://tva1.sinaimg.cn/large/008i3skNly1gqb185dlwtj31a00o07kk.jpg)
 
 至此,就全部结束了. 想想我在搞这个东西的时候遇到的坑,现在都觉得好恶心. 整整弄了一下午, 希望对后来者有些许帮助吧.
 全部原创,欢迎转载!转载请注明出处.谢谢!
