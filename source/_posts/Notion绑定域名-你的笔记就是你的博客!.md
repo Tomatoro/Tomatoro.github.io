@@ -124,7 +124,7 @@ Once you have followed those steps, copy this script into that new file.
         let redrictUrl = `https://${MY_DOMAIN}/${pageUrlList[pageUrlList.length-1]}`
         return Response.redirect(redrictUrl, 301)
       } else {
-        response = await fetch(`https://www.notion.so${url.pathname}`, {
+        response = await fetch(`https://www.notion.so${url.pathname}${url.search}`, {
           body: request.body, // must match 'Content-Type' header
           headers: request.headers,
           method: request.method, // *GET, POST, PUT, DELETE, etc.

@@ -111,7 +111,8 @@ deploy:
 - type: git
   repo: 
     github: https://github.com/Tomatoro/Tomatoro.github.io.git
-    coding: https://dev.tencent.com/u/Tomatoro/p/Tomatoro.coding.me
+    # coding: https://dev.tencent.com/u/Tomatoro/p/Tomatoro.coding.me
+    coding: https://e.coding.net/Tomatoro/Tomatoro.coding.me.git
   branch: master
   
 # hexo-generator-searchdb@1.0.8
