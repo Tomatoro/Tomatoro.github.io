@@ -106,14 +106,14 @@ markdown:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
+- type: git
+  repo: https://github.com/Tomatoro/Tomatoro.github.io
+    # github: https://github.com/Tomatoro/Tomatoro.github.io
+    # coding: https://dev.tencent.com/u/Tomatoro/p/Tomatoro.coding.me
+    # coding: https://e.coding.net/Tomatoro/Tomatoro.coding.me.git
+  branch: master
 - type: baidu_url_submitter ## 这是新加的
   bucket: tomatoro.cn
-- type: git
-  repo: 
-    github: https://github.com/Tomatoro/Tomatoro.github.io.git
-    # coding: https://dev.tencent.com/u/Tomatoro/p/Tomatoro.coding.me
-    coding: https://e.coding.net/Tomatoro/Tomatoro.coding.me.git
-  branch: master
   
 # hexo-generator-searchdb@1.0.8
 search:
