@@ -8,7 +8,7 @@ subtitle: 与未知的相遇,七分欢喜,三分孤寂。
 description: It's Tomatoro's Blog,分享技术,分享快乐!
 keywords: 前端,网站搭建,域名注册,博客搭建,JavaScript,CSS,HTML,Vue,Blog.
 author: Tomatoro
-language: zh-CN
+language:
 timezone:
 
 # URL
