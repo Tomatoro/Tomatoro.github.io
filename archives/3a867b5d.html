@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="前端,网站搭建,域名注册,博客搭建,JavaScript,CSS,HTML,Vue,Blog.">
+  
+  
+    <meta name="description" content="It&#39;s Tomatoro&#39;s Blog,分享技术,分享快乐!">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+      再读一次Vue官方文档带来的意外惊喜 |
+    
+      Tomatoro
+    </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-再读一次Vue官方文档带来的意外惊喜" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      再读一次Vue官方文档带来的意外惊喜
+    </h1>
+  
+  
+  <div class="article-normal">
+    <i class="fe fe-book"></i>
+  </>
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/archives/3a867b5d.html" class="article-date">
+  <time datetime="2019-12-26T14:20:38.000Z" itemprop="datePublished">2019-12-26</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
+<p>Vue目前算是我用的时间最长的一个框架了,但是最近总是在想,我真的了解Vue了吗,还是说,仅仅只是会用它而已了呢.<br>最开始用Vue的时候只是草草看了一遍文档,细节之处并未关心,以至于后面项目中遇到很多问题之后才又反复的去查文档,解决问题.<br>我认为,不应该是这样的,这种程度,仅仅只能让我有处理问题的能力,虽然经验让我再遇到问题的时候知道大概的导向,但这样永远不会建立起对Vue技术怀有的自信.<br>于是,我打算再来一遍官方文档,记录其中从未曾了解过的东西.在这之后,我便会去尝试着去读读Vue的源码,并分享出来.</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="动态参数"><a href="#动态参数" class="headerlink" title="动态参数"></a>动态参数</h3><p><code>&lt;a :[attributeName]=&quot;url&quot;&gt; ... &lt;/a&gt;</code></p>
+<p>这里的 <code>attributeName</code> 会被作为一个 JavaScript 表达式进行动态求值，求得的值将会作为最终的参数来使用。例如，如果你的 Vue 实例有一个 <code>data</code> 属性 <code>attributeName</code>，其值为 “href”，那么这个绑定将等价于 <code>v-bind:href</code></p>
+<p>注意点: </p>
+<ul>
+<li><code>attributeName</code> 应该全部都是小写</li>
+<li><code>attributeName</code> 如果是通过表达式生成的,那应将其放在计算属性中,避免直接在HTML中书写表达式</li>
+</ul>
+<h3 id="动态class和style的几种写法"><a href="#动态class和style的几种写法" class="headerlink" title="动态class和style的几种写法"></a>动态class和style的几种写法</h3><ul>
+<li><p>class</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> &lt;div v-bind:<span class="class"><span class="keyword">class</span></span>=<span class="string">"&#123; 'active': isActive, 'text-danger': hasError &#125;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span> <span class="comment">// 对象语法</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> &lt;div v-bind:<span class="class"><span class="keyword">class</span></span>=<span class="string">"classObject"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><span class="comment">// 对象语法</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> &lt;div v-bind:<span class="class"><span class="keyword">class</span></span>=<span class="string">"[&#123; 'active': isActive &#125;, errorClass]"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><span class="comment">// 数组语法 </span></span><br><span class="line"></span><br><span class="line">   data: &#123;</span><br><span class="line">   isActive: <span class="literal">true</span>,</span><br><span class="line">   hasError: <span class="literal">false</span>,</span><br><span class="line">   classObject: &#123;</span><br><span class="line">     active: <span class="literal">true</span>,</span><br><span class="line">     <span class="string">'text-danger'</span>: <span class="literal">false</span></span><br><span class="line">   &#125;,</span><br><span class="line">   errorClass: <span class="string">'text-danger'</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>style</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> &lt;div v-bind:style=<span class="string">"&#123; color: activeColor, fontSize: fontSize + 'px' &#125;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><span class="comment">// 对象语法</span></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> &lt;div v-bind:style=<span class="string">"styleObject"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><span class="comment">// 对象语法</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> &lt;div v-bind:style=<span class="string">"[styleObject, styleObject2]"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><span class="comment">// 数组语法</span></span><br><span class="line"></span><br><span class="line">data: &#123;</span><br><span class="line">	activeColor: <span class="string">'red'</span>,</span><br><span class="line">  fontSize: <span class="number">30</span>,</span><br><span class="line">	styleObject: &#123;</span><br><span class="line">    color: <span class="string">'red'</span>,</span><br><span class="line">    fontSize: <span class="string">'13px'</span></span><br><span class="line">  &#125;,</span><br><span class="line">	styleObject2: &#123;</span><br><span class="line">    color: <span class="string">'blac'</span>,</span><br><span class="line">    fontSize: <span class="string">'13px'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><p><code>v-show</code> 不支持 <code>&lt;template&gt;</code> 元素，也不支持 <code>v-else</code></p>
+<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><p><code>v-for</code>遍历对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-<span class="keyword">for</span>=<span class="string">"(value, name, index) in object"</span>&gt;</span><br><span class="line">  &#123;&#123; index &#125;&#125;. &#123;&#123; name &#125;&#125;: &#123;&#123; value &#125;&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue无法检测的数据变动的情况"><a href="#Vue无法检测的数据变动的情况" class="headerlink" title="Vue无法检测的数据变动的情况"></a>Vue无法检测的数据变动的情况</h3><ul>
+<li><p>数组</p>
+<ol>
+<li>当你利用索引直接设置一个数组项时，例如：<code>vm.items[indexOfItem] = newValue</code></li>
+<li>当你修改数组的长度时，例如：<code>vm.items.length = newLength</code></li>
+</ol>
+<p>解决办法:</p>
+<ul>
+<li>使用<code>vm.$set()</code> eg. <code>vm.$set(vm.items, indexOfItem, newValue)</code></li>
+<li>为数组重新赋值新修改的数组</li>
+</ul>
+</li>
+<li><p>对象</p>
+<ol>
+<li>对象属性的添加</li>
+<li>对象属性的删除</li>
+</ol>
+<p>解决办法:</p>
+<ul>
+<li>为对象初始一个空的将要添加的对象</li>
+<li>使用<code>vm.$set()</code> eg. <code>vm.$set(vm.Obj, keyOfObj, newValue)</code></li>
+<li>使用<code>Object.assign()</code> eg. <code>vm.userProfile = Object.assign({}, vm.userProfile, { age: 27, favoriteColor: &#39;Green&#39;})</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h3><ul>
+<li><p><code>.stop</code>           阻止事件冒泡</p>
+</li>
+<li><p><code>.prevent</code>     阻止浏览器默认行为发生</p>
+</li>
+<li><p><code>.capture</code>     捕获冒泡，即有冒泡发生时，有该修饰符的dom元素会先执行，如果有多个，从外到内依次执行，然后再按自然顺序执行触发的事件</p>
+</li>
+<li><p><code>.self</code>           将事件绑定到自身，只有自身才能触发，通常用于避免冒泡事件的影响</p>
+</li>
+<li><p><code>.once</code>           设置事件只能触发一次，比如按钮的点击等</p>
+</li>
+<li><p><code>.passive</code>      执行浏览器的默认行为</p>
+</li>
+</ul>
+<blockquote>
+<p>【浏览器只有等内核线程执行到事件监听器对应的JavaScript代码时，才能知道内部是否会调用preventDefault函数来阻止事件的默认行为，所以浏览器本身是没有办法对这种场景进行优化的。这种场景下，用户的手势事件无法快速产生，会导致页面无法快速执行滑动逻辑，从而让用户感觉到页面卡顿。】<br>通俗点说就是每次事件产生，浏览器都会去查询一下是否有preventDefault阻止该次事件的默认动作。我们加上passive就是为了告诉浏览器，不用查询了，我们没用preventDefault阻止默认动作。<br>这里一般用在滚动监听，@scoll，@touchmove 。因为滚动监听过程中，移动每个像素都会产生一次事件，每次都使用内核线程查询prevent会使滑动卡顿。我们通过passive将内核线程查询跳过，可以大大提升滑动的流畅度</p>
+</blockquote>
+<h3 id="键盘按键修饰符"><a href="#键盘按键修饰符" class="headerlink" title="键盘按键修饰符"></a>键盘按键修饰符</h3><ul>
+<li><code>.enter</code></li>
+<li><code>.tab</code></li>
+<li><code>.delete</code></li>
+<li><code>.esc</code></li>
+<li><code>.space</code></li>
+<li><code>.up</code></li>
+<li><code>.down</code></li>
+<li><code>.left</code></li>
+<li><code>.right</code></li>
+</ul>
+<h3 id="鼠标按钮修饰符"><a href="#鼠标按钮修饰符" class="headerlink" title="鼠标按钮修饰符"></a>鼠标按钮修饰符</h3><ul>
+<li><code>.left</code></li>
+<li><code>.right</code></li>
+<li><code>.middle</code></li>
+</ul>
+<h3 id="系统修饰键"><a href="#系统修饰键" class="headerlink" title="系统修饰键"></a>系统修饰键</h3><p>可以用如下修饰符来实现仅在按下相应按键时才触发鼠标或键盘事件的监听器。</p>
+<ul>
+<li><p><code>.ctrl</code></p>
+</li>
+<li><p><code>.alt</code></p>
+</li>
+<li><p><code>.shift</code></p>
+</li>
+<li><p><code>.meta</code>         对应command 键 (⌘)和Windows 徽标键 (⊞)</p>
+</li>
+<li><p><code>.exact</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 即使 Alt 或 Shift 被一同按下时也会触发 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.ctrl</span>=<span class="string">"onClick"</span>&gt;</span>A<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 有且只有 Ctrl 被按下的时候才触发 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.ctrl.exact</span>=<span class="string">"onCtrlClick"</span>&gt;</span>A<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 没有任何系统修饰符被按下的时候才触发 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.exact</span>=<span class="string">"onClick"</span>&gt;</span>A<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="v-model修饰符"><a href="#v-model修饰符" class="headerlink" title="v-model修饰符"></a>v-model修饰符</h3><ul>
+<li><code>.lazy</code>      在“change”时而非“input”时更新</li>
+<li><code>.number</code>  自动将输入值转为number类型</li>
+<li><code>.trim</code>          自动过滤用户输入的首尾空白字符</li>
+</ul>
+<h3 id="Vue全局导入基础组件的示例代码"><a href="#Vue全局导入基础组件的示例代码" class="headerlink" title="Vue全局导入基础组件的示例代码"></a>Vue全局导入基础组件的示例代码</h3><p>详述👉🏻<a href="https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js" target="_blank" rel="noopener">chrisvfritz/vue-enterprise-boilerplate</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElTableColumnPro <span class="keyword">from</span> <span class="string">'./ElTableColumnPro.vue'</span></span><br><span class="line"></span><br><span class="line">ElTableColumnPro.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>) </span>&#123;</span><br><span class="line">	Vue.component(ElTableColumnPro.name, ElTableColumnPro)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.Vue) &#123;</span><br><span class="line">	<span class="built_in">window</span>.Vue.use(ElTableColumnPro)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> ElTableColumnPro</span><br></pre></td></tr></table></figure>
+
+<h3 id="插槽"><a href="#插槽" class="headerlink" title="插槽"></a>插槽</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 插槽模板 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"header"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 使用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">base-layout</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Here might be a page title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:default</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>A paragraph for the main content.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>And another one.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Here's some contact info<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">base-layout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="inheritAttrs-attrs-listeners"><a href="#inheritAttrs-attrs-listeners" class="headerlink" title="inheritAttrs , $attrs , $listeners"></a>inheritAttrs , $attrs , $listeners</h3><p>总结一句话: $attrs存储非prop特性，inheritAttrs控制vue对非prop特性默认行为</p>
+<p>详述👉🏻<a href="https://www.notion.so/Vue-inheritAttrs-attrs-listeners-f3c6e8175b2e4fd6a5d973b7b869c1a8" target="_blank" rel="noopener">Vue inheritAttrs, $attrs,$listeners  详解 </a></p>
+<h3 id="依赖注入-provide-和-inject"><a href="#依赖注入-provide-和-inject" class="headerlink" title="依赖注入 provide 和 inject"></a>依赖注入 provide 和 inject</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">provide: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    getMap: <span class="keyword">this</span>.getMap</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 父组件下的所有组件(子,孙,重孙...)</span></span><br><span class="line">inject: [<span class="string">'getMap'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>详述👉🏻<a href="https://www.notion.so/Vue-Provide-Inject-626f1d6c4841455b89b2ec3aa3388f22" target="_blank" rel="noopener">Vue的组件通信之Provide与Inject机制</a></p>
+<h3 id="程序化的事件侦听器"><a href="#程序化的事件侦听器" class="headerlink" title="程序化的事件侦听器"></a>程序化的事件侦听器</h3><p>（懵逼的定义–其实就是创建实例和清除实例放在一起,简化操作和无用的代码）</p>
+<ul>
+<li>通过 <code>$on(eventName, eventHandler)</code> 侦听一个事件</li>
+<li>通过 <code>$once(eventName, eventHandler)</code> 一次性侦听一个事件</li>
+<li>通过 <code>$off(eventName, eventHandler)</code> 停止侦听一个事件</li>
+</ul>
+<p>详述👉🏻<a href="https://www.notion.so/vue-bf198384038841b7a5ae6b35ffe75cf0" target="_blank" rel="noopener">vue 程序化的事件侦听器</a></p>
+<h3 id="强制更新-forceUpdate"><a href="#强制更新-forceUpdate" class="headerlink" title="强制更新 $forceUpdate"></a>强制更新 $forceUpdate</h3><p>如果你发现你自己需要在 Vue 中做一次强制更新，99.9% 的情况，是你在某个地方做错了事。</p>
+<p>你可能还没有留意到数组和对象的变更检测注意事项，或者你可能依赖了一个未被 Vue 的响应式系统追踪的状态。</p>
+<p>然而，如果你已经做到了上述的事项仍然发现在极少数的情况下需要手动强制更新，那么你可以通过 $forceUpdate 来做这件事。</p>
+<h3 id="通过-v-once-创建低开销的静态组件"><a href="#通过-v-once-创建低开销的静态组件" class="headerlink" title="通过 v-once 创建低开销的静态组件"></a>通过 v-once 创建低开销的静态组件</h3><p>渲染普通的 HTML 元素在 Vue 中是非常快速的，但有的时候你可能有一个组件，这个组件包含了大量静态内容。在这种情况下，你可以在根元素上添加 v-once 特性以确保这些内容只计算一次然后缓存起来,并不再更新. ( 正常情况下不会用到 )</p>
+<h3 id="过渡-transition"><a href="#过渡-transition" class="headerlink" title="过渡 transition"></a>过渡 transition</h3><p><strong>哪些组件/元素可以用?</strong></p>
+<ul>
+<li>条件渲染 (使用 <code>v-if</code>)</li>
+<li>条件展示 (使用 <code>v-show</code>)</li>
+<li>动态组件</li>
+<li>组件根节点</li>
+</ul>
+<p><strong>过渡类</strong></p>
+<ul>
+<li><code>v-enter</code>：定义进入过渡的开始状态。</li>
+<li><code>v-enter-active</code>：定义进入过渡生效时的状态。</li>
+<li><code>v-enter-to</code>: 定义进入过渡的结束状态。</li>
+<li><code>v-leave</code>: 定义离开过渡的开始状态。</li>
+<li><code>v-leave-active</code>：定义离开过渡生效时的状态。</li>
+<li><code>v-leave-to</code>: 定义离开过渡的结束状态。</li>
+</ul>
+<p>对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 <code>，则 `v-` 是这些类名的默认前缀。如果你使用了</code>，那么 <code>v-enter</code> 会替换为 <code>my-transition-enter</code>。</p>
+<p><strong>过渡模式</strong></p>
+<ul>
+<li><p><code>in-out</code>：新元素先进行过渡，完成之后当前元素过渡离开。</p>
+</li>
+<li><p><code>out-in</code>：当前元素先进行过渡，完成之后新元素过渡进入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition name=<span class="string">"fade"</span> mode=<span class="string">"out-in"</span>&gt; <span class="xml"><span class="comment">&lt;!-- ... the buttons ... --&gt;</span> <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>自定义过渡类名</strong></p>
+<ul>
+<li><p><code>enter-class</code></p>
+</li>
+<li><p><code>enter-active-class</code></p>
+</li>
+<li><p><code>enter-to-class</code></p>
+</li>
+<li><p><code>leave-class</code></p>
+</li>
+<li><p><code>leave-active-class</code></p>
+</li>
+<li><p><code>leave-to-class</code></p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition</span><br><span class="line">  v-on:before-enter=<span class="string">"beforeEnter"</span></span><br><span class="line">  v-on:enter=<span class="string">"enter"</span></span><br><span class="line">  v-on:after-enter=<span class="string">"afterEnter"</span></span><br><span class="line">  v-on:enter-cancelled=<span class="string">"enterCancelled"</span></span><br><span class="line">  v-on:before-leave=<span class="string">"beforeLeave"</span></span><br><span class="line">  v-on:leave=<span class="string">"leave"</span></span><br><span class="line">  v-on:after-leave=<span class="string">"afterLeave"</span></span><br><span class="line">  v-on:leave-cancelled=<span class="string">"leaveCancelled"</span></span><br><span class="line">&gt;</span><br><span class="line">  &lt;!-- ... --&gt;</span><br><span class="line">&lt;<span class="regexp">/transition&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="渲染函数-amp-JSX"><a href="#渲染函数-amp-JSX" class="headerlink" title="渲染函数&amp;JSX"></a>渲染函数&amp;JSX</h3><p>感觉好菜啊!读到这里发现读完之后没有什么GET到的点,做个记录,之后再返回来细细品一下.👉🏻<a href="https://vuejs.bootcss.com/v2/guide/render-function.html" target="_blank" rel="noopener">link</a></p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>看到这里才发现新大陆👉🏻<a href="https://github.com/vuejs/awesome-vue#components--libraries" target="_blank" rel="noopener">link</a>, 以后要写一个自己的插件出来</p>
+<h3 id="Over"><a href="#Over" class="headerlink" title="Over"></a>Over</h3><p>前前后后花了将近一周,终于将Vue的文档重新过了一遍, 确实, 收获还是蛮多的. 在平常项目开发中, 有许多的东西并不会真切的用到, 但是知识储备还是必须的. 这样在项目中遇到问题之后, 会有自己的一个思路, 从而可以更快的追溯到问题的根源. 继续努力!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://tomatoro.up.railway.app/archives/3a867b5d.html" data-id="cli19uq6d000z1v8imzs3t42n"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/archives/f29baeb3.html" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            Vue的组件通信之Provide与Inject机制
+          
+        </div>
+      </a>
+    
+    
+      <a href="/archives/a6b6c05e.html" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">SEO你的HEXO博客</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+<div class="vcomments" id="vcomments"></div>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz',
+		appKey: 'MKI3gklnGb5sVCOEUmibUD6g',
+		notify: 'true',
+		verify: 'true',
+		avatar: 'mp',
+		pageSize: '10',
+		placeholder: '请输入...'
+	})
+</script>
+
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>I Love You Three Thousand Times ! <i class="fe fe-heart-o"></i></li>
+      <li><a href="https://github.com/Tomatoro/Tomatoro.github.io">Tomatoro</a> &copy; 2023</li>
+      <!-- <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/blank-logo.svg" alt="Tomatoro"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives/">文章</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery/">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories/">类别</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags/">标签</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about/">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
