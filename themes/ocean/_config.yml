@@ -1,11 +1,11 @@
 # Menu
 menu:
   主页: /
-  文章: /archives
-  相册: /gallery
-  类别: /categories
-  标签: /tags
-  关于: /about
+  文章: /archives/
+  相册: /gallery/
+  类别: /categories/
+  标签: /tags/
+  关于: /about/
 rss: /atom.xml
 
 
