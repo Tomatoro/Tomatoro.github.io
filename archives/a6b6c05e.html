@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="前端,网站搭建,域名注册,博客搭建,JavaScript,CSS,HTML,Vue,Blog.">
+  
+  
+    <meta name="description" content="It&#39;s Tomatoro&#39;s Blog,分享技术,分享快乐!">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+      SEO你的HEXO博客 |
+    
+      Tomatoro
+    </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-SEO你的HEXO博客" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SEO你的HEXO博客
+    </h1>
+  
+  
+  <div class="article-normal">
+    <i class="fe fe-book"></i>
+  </>
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/archives/a6b6c05e.html" class="article-date">
+  <time datetime="2019-12-03T12:31:11.000Z" itemprop="datePublished">2019-12-03</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="STEP1-百度收录站点"><a href="#STEP1-百度收录站点" class="headerlink" title="STEP1      百度收录站点"></a>STEP1      百度收录站点</h3><p>登录<a href="http://zhanzhang.baidu.com/" target="_blank" rel="noopener">百度站长平台</a>，在用户中心 =&gt; 站点管理添加你的站点网址</p>
+<a id="more"></a>
+
+<p>配置完站点属性后，进入最后一步：验证网站。有三种方式：文件验证、HTML标签验证、CNAME验证.( 这里如果不会自行百度一下吧,网上内容有很多,这里就不在累述了. )</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf84kymlj30y50lydl0.jpg" alt="HEXO%20SEO/Untitled.png"></p>
+<h3 id="STEP2-keywords-和-url地址栏优化"><a href="#STEP2-keywords-和-url地址栏优化" class="headerlink" title="STEP2      keywords 和 url地址栏优化"></a>STEP2      keywords 和 url地址栏优化</h3><ul>
+<li>在根目录和themes目录下的两个_config.yml文件下找到permalink将其修改为下面这样:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># permalink: :year/:month/:day/:title/</span></span><br><span class="line">permalink: archives/:abbrlink.html</span><br><span class="line">permalink_defaults:</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc32  <span class="comment"># 算法：crc16(default) and crc32</span></span><br><span class="line">  rep: hex</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装相关的依赖</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink -S</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行hexo部署命名</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>完成!</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf88nkb6j30wm0ncdvb.jpg" alt="HEXO%20SEO/Untitled%201.png"></p>
+<h3 id="STEP3-配置百度-主动推送-自动推送-和sitemap"><a href="#STEP3-配置百度-主动推送-自动推送-和sitemap" class="headerlink" title="STEP3      配置百度 主动推送 自动推送 和sitemap"></a>STEP3      配置百度 主动推送 自动推送 和sitemap</h3><p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf8ekxbwj30rq05ndgx.jpg" alt="HEXO%20SEO/Untitled%202.png"></p>
+<ul>
+<li>安装相关依赖</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-baidu-url-submit -S</span><br><span class="line">npm install hexo-generator-sitemap -S</span><br><span class="line">npm install hexo-generator-baidu-sitemap -S</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>主动推送和sitemap的配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">- <span class="built_in">type</span>: baidu_url_submitter <span class="comment">## 这是新加的</span></span><br><span class="line">  bucket: tomatoro.cn <span class="comment">## 你自己的域名</span></span><br><span class="line"></span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br><span class="line">baidusitemap:</span><br><span class="line">  path: baidusitemap.xml</span><br><span class="line"></span><br><span class="line">baidu_url_submit:</span><br><span class="line">  count: 100 <span class="comment">## 比如3，代表提交最新的三个链接</span></span><br><span class="line">  host: tomatoro.cn <span class="comment">## 在百度站长平台中注册的域名</span></span><br><span class="line">  token: --------- <span class="comment">## 请注意这是您的秘钥，请不要发布在公众仓库里!</span></span><br><span class="line">  path: baidu_urls.txt <span class="comment">## 文本文档的地址，新链接会保存在此文本文档里</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf8jlu6wj30w80u0kjl.jpg" alt="HEXO%20SEO/Untitled%203.png"></p>
+</li>
+<li><p>自动推送的代码粘贴到相应的位置即可</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> bp = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">      <span class="keyword">var</span> curProtocol = <span class="built_in">window</span>.location.protocol.split(<span class="string">':'</span>)[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">if</span> (curProtocol === <span class="string">'https'</span>) &#123;</span><br><span class="line">          bp.src = <span class="string">'https://zz.bdstatic.com/linksubmit/push.js'</span>;        </span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">          bp.src = <span class="string">'http://push.zhanzhang.baidu.com/push.js'</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">var</span> s = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>];</span><br><span class="line">      s.parentNode.insertBefore(bp, s);</span><br><span class="line">  &#125;)();</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>  <img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf8oq65mj30w90u0qv5.jpg" alt="HEXO%20SEO/Untitled%204.png"></p>
+<ul>
+<li>执行hexo部署命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>将这些配置全部走完一遍之后, 你博客的SEO优化就算完成了, 在百度上去搜可以发现可以很轻松的搜索到你的博客. 但是, 请记住SEO是一条漫长的道路, 并不是一天就能实现网站排名靠前的, 需要你不断的更新高质量多的博文, 吸引流量才可以.</p>
+<h3 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成!"></a>大功告成!</h3><p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9jf8rqebgj30y20td4iz.jpg" alt="HEXO%20SEO/Untitled%205.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://tomatoro.cn/archives/a6b6c05e.html" data-id="cli141lfj000ftc8iwo2efil2"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/">Blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SEO/">SEO</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/archives/3a867b5d.html" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            再读一次Vue官方文档带来的意外惊喜
+          
+        </div>
+      </a>
+    
+    
+      <a href="/archives/c60ac904.html" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Notion绑定域名-你的笔记就是你的博客!</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+<div class="vcomments" id="vcomments"></div>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz',
+		appKey: 'MKI3gklnGb5sVCOEUmibUD6g',
+		notify: 'true',
+		verify: 'true',
+		avatar: 'mp',
+		pageSize: '10',
+		placeholder: '请输入...'
+	})
+</script>
+
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>I Love You Three Thousand Times ! <i class="fe fe-heart-o"></i></li>
+      <li><a href="https://github.com/Tomatoro/Tomatoro.github.io">Tomatoro</a> &copy; 2023</li>
+      <!-- <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/blank-logo.svg" alt="Tomatoro"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">文章</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">类别</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">标签</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="前端,网站搭建,域名注册,博客搭建,JavaScript,CSS,HTML,Vue,Blog.">
+  
+  
+    <meta name="description" content="It&#39;s Tomatoro&#39;s Blog,分享技术,分享快乐!">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+      用优雅的方式进行数组去重 |
+    
+      Tomatoro
+    </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-用优雅的方式进行数组去重" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用优雅的方式进行数组去重
+    </h1>
+  
+  
+  <div class="article-normal">
+    <i class="fe fe-book"></i>
+  </>
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/archives/9c7dd70f.html" class="article-date">
+  <time datetime="2019-08-22T16:47:59.000Z" itemprop="datePublished">2019-08-22</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <blockquote>
+<p>想必,数组去重已经是一个老生常谈的问题了, 到现在为止我们要考虑的并不是怎么去实现一个数组去重, 而更应该关注,怎样使用一段更短的代码, 更优雅, 更简洁的达到我们想要的效果.</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><blockquote>
+<p>我们这里直接列出三种比较优雅的数组去重的方法,在后面对每个进行详细的解析</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> originalArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">'咩'</span>, <span class="number">1</span>, <span class="string">'Super Ball'</span>, <span class="string">'咩'</span>, <span class="string">'咩'</span>, <span class="string">'Super Ball'</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bySet = [...new <span class="built_in">Set</span>(originalArray)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> byFilter = originalArray.filter(<span class="function">(<span class="params">item, index</span>) =&gt;</span> originalArray.indexOf(item) === index)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> byReduce = originalArray.reduce(<span class="function">(<span class="params">unique, item</span>) =&gt;</span> unique.includes(item) ? unique : [...unique, item], [])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>先让我们来看看 <code>Set</code> 到底是个啥</p>
+<blockquote>
+<p>Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。<br><cite><a href="https://developer.mozilla.org" target="_blank" rel="noopener">https://developer.mozilla.org</a>…</cite></p>
+</blockquote>
+<p>首先， <code>Set</code> 中只允许出现唯一值<br>唯一性是比对原始值或者对象引用</p>
+<p><code>const bySet = [...new Set(originalArray)]</code>这一段的操作，我们将它拆分来看：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> originalArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">'咩'</span>, <span class="number">1</span>, <span class="string">'Super Ball'</span>, <span class="string">'咩'</span>, <span class="string">'咩'</span>, <span class="string">'Super Ball'</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> uniqueSet = <span class="keyword">new</span> <span class="built_in">Set</span>(originalArray)</span><br><span class="line"><span class="comment">// 得到 Set(5) [ 1, 2, "咩", "Super Ball", 4 ]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bySet = [...uniqueSet]</span><br><span class="line"><span class="comment">// 得到 Array(5) [ 1, 2, "咩", "Super Ball", 4 ]</span></span><br></pre></td></tr></table></figure>
+
+<p>在将 <code>Set</code> 转为 <code>Array</code> 时，也可以使用 <code>Array.from(set)</code>。</p>
+<h3 id="Array-prototype-filter"><a href="#Array-prototype-filter" class="headerlink" title="Array.prototype.filter"></a>Array.prototype.filter</h3><p>要理解 <code>filter</code> 方法为什么可以去重，需要关注一下另一个方法 <code>indexOf</code></p>
+<blockquote>
+<p>indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回 -1。<br><cite><a href="https://developer.mozilla.org" target="_blank" rel="noopener">https://developer.mozilla.org</a>…</cite></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> beasts = [<span class="string">'ant'</span>, <span class="string">'bison'</span>, <span class="string">'camel'</span>, <span class="string">'duck'</span>, <span class="string">'bison'</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(beasts.indexOf(<span class="string">'bison'</span>));</span><br><span class="line"><span class="comment">// expected output: 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// start from index 2</span></span><br><span class="line"><span class="built_in">console</span>.log(beasts.indexOf(<span class="string">'bison'</span>, <span class="number">2</span>));</span><br><span class="line"><span class="comment">// expected output: 4</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(beasts.indexOf(<span class="string">'giraffe'</span>));</span><br><span class="line"><span class="comment">// expected output: -1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>filter() 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。<br><cite><a href="https://developer.mozilla.org" target="_blank" rel="noopener">https://developer.mozilla.org</a>…</cite></p>
+</blockquote>
+<p><code>filter</code> 方法接受两个参数：</p>
+<ol>
+<li>第一个参数：一个回调函数， <code>filter</code> 会将数据中的每一项都传递给该函数，若该函数返回 真值，则数据保存，返回 假值，则数据将不会出现在新生成的数据中</li>
+<li>第二个参数：回调函数中 <code>this</code> 的指向</li>
+</ol>
+<p>我们将上面的去重方法按下面这样重写一下，就可以看清整个 <code>filter</code> 的执行过程了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> originalArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">'咩'</span>, <span class="number">1</span>, <span class="string">'Super Ball'</span>, <span class="string">'咩'</span>, <span class="string">'咩'</span>, <span class="string">'Super Ball'</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> table = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> byFilter = originalArray.filter(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 如果找到的索引与当前索引一致，则保留该值</span></span><br><span class="line">  <span class="keyword">const</span> shouldKeep = originalArray.indexOf(item) === index</span><br><span class="line">  table.push(&#123;</span><br><span class="line">    序号: index,</span><br><span class="line">    值: item,</span><br><span class="line">    是否应该保留: shouldKeep ? <span class="string">'保留'</span> : <span class="string">'删除'</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> shouldKeep</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(byFilter)</span><br><span class="line"><span class="built_in">console</span>.table(table)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>值</th>
+<th>是否应该保留</th>
+<th>出现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1</td>
+<td>保留</td>
+<td>第一次出现</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>保留</td>
+<td>第一次出现</td>
+</tr>
+<tr>
+<td>2</td>
+<td>咩</td>
+<td>保存</td>
+<td>第一次出现</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>删除</td>
+<td>第二次出现</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Super Ball</td>
+<td>保留</td>
+<td>第一次出现</td>
+</tr>
+<tr>
+<td>5</td>
+<td>咩</td>
+<td>删除</td>
+<td>第二次出现</td>
+</tr>
+<tr>
+<td>6</td>
+<td>咩</td>
+<td>删除</td>
+<td>第三次出现</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Super Ball</td>
+<td>删除</td>
+<td>第二次出现</td>
+</tr>
+<tr>
+<td>8</td>
+<td>4</td>
+<td>保留</td>
+<td>第一次出现</td>
+</tr>
+</tbody></table>
+<h3 id="Array-prototype-reduce"><a href="#Array-prototype-reduce" class="headerlink" title="Array.prototype.reduce"></a>Array.prototype.reduce</h3><blockquote>
+<p>reduce() 方法对数组中的每个元素执行一个由您提供的 reducer 函数(升序执行)，将其结果汇总为单个返回值。<br><cite><a href="https://developer.mozilla.org" target="_blank" rel="noopener">https://developer.mozilla.org</a>…</cite></p>
+</blockquote>
+<p><code>Array.prototype.reduce</code> 方法接受两个参数：</p>
+<ul>
+<li><p><code>Callback</code>：回调函数，它可以接收四个参数</p>
+</li>
+<li><p><code>Accumulator</code>：累计器，这个其实是让很多人忽略的一点，就是，累计器其实可以是任何类型的数据</p>
+<ul>
+<li><code>Current Value</code>：当前值</li>
+<li><code>Current Index</code>：当前值的索引</li>
+<li><code>Source Array</code>：源数组</li>
+<li><code>Initial Value</code>：累计器的初始值，就跟累计器一样，这个参数也总是被绝大多数人忽略</li>
+</ul>
+</li>
+</ul>
+<p>就像 filter 章节一样，我们来看看 reduce 的执行过程：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> originalArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">'咩'</span>, <span class="number">1</span>, <span class="string">'Super Ball'</span>, <span class="string">'咩'</span>, <span class="string">'咩'</span>, <span class="string">'Super Ball'</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> byReduce = originalArray.reduce(<span class="function">(<span class="params">unique, item, index, source</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> exist = unique.includes(item)</span><br><span class="line">  <span class="keyword">const</span> next = unique.includes(item) ? unique : [...unique, item]</span><br><span class="line">  <span class="built_in">console</span>.group(<span class="string">`遍历第 <span class="subst">$&#123;index&#125;</span> 个值`</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'当前累计器：'</span>, unique)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'当前值：'</span>, item)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'是否已添加进累计器？'</span>, exist)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'新值'</span>, next)</span><br><span class="line">  <span class="built_in">console</span>.groupEnd()</span><br><span class="line">  <span class="keyword">return</span> next</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://tomatoro.cn/archives/9c7dd70f.html" data-id="cli141lg20019tc8i0m56ngyo"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/archives/3f0a5b42.html" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            【转】网上都说操作真实 DOM 慢，但测试结果却比 React 更快，为什么？
+          
+        </div>
+      </a>
+    
+    
+      <a href="/archives/d97dbbe6.html" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">如何在一台设备上同时配置github和gitlab的SSH</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+<div class="vcomments" id="vcomments"></div>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz',
+		appKey: 'MKI3gklnGb5sVCOEUmibUD6g',
+		notify: 'true',
+		verify: 'true',
+		avatar: 'mp',
+		pageSize: '10',
+		placeholder: '请输入...'
+	})
+</script>
+
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>I Love You Three Thousand Times ! <i class="fe fe-heart-o"></i></li>
+      <li><a href="https://github.com/Tomatoro/Tomatoro.github.io">Tomatoro</a> &copy; 2023</li>
+      <!-- <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/blank-logo.svg" alt="Tomatoro"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">文章</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">类别</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">标签</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

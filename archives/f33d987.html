@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="前端,网站搭建,域名注册,博客搭建,JavaScript,CSS,HTML,Vue,Blog.">
+  
+  
+    <meta name="description" content="It&#39;s Tomatoro&#39;s Blog,分享技术,分享快乐!">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+      Git在团队中的最佳实践 |
+    
+      Tomatoro
+    </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-Git在团队中的最佳实践" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git在团队中的最佳实践
+    </h1>
+  
+  
+  <div class="article-normal">
+    <i class="fe fe-book"></i>
+  </>
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/archives/f33d987.html" class="article-date">
+  <time datetime="2019-10-23T11:00:14.000Z" itemprop="datePublished">2019-10-23</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g87ysjhs9oj30u014ek1b.jpg" alt></p>
+<a id="more"></a>
+
+<h4 id="Git-Flow常用的分支"><a href="#Git-Flow常用的分支" class="headerlink" title="Git Flow常用的分支"></a>Git Flow常用的分支</h4><ul>
+<li>Production 分支</li>
+</ul>
+<p>也就是我们经常使用的Master分支，这个分支最近发布到生产环境的代码，最近发布的Release， 这个分支只能从其他分支合并，不能在这个分支直接修改</p>
+<ul>
+<li>Develop 分支</li>
+</ul>
+<p>这个分支是我们是我们的主开发分支，包含所有要发布到下一个Release的代码，这个主要合并与其他分支，比如Feature分支</p>
+<ul>
+<li>Feature 分支</li>
+</ul>
+<p>这个分支主要是用来开发一个新的功能，一旦开发完成，我们合并回Develop分支进入下一个Release</p>
+<ul>
+<li>Release分支</li>
+</ul>
+<p>当你需要一个发布一个新Release的时候，我们基于Develop分支创建一个Release分支，完成Release后，我们合并到Master和Develop分支</p>
+<ul>
+<li>Hotfix分支</li>
+</ul>
+<p>当我们在Production发现新的Bug时候，我们需要创建一个Hotfix, 完成Hotfix后，我们合并回Master和Develop分支，所以Hotfix的改动会进入下一个Release</p>
+<h4 id="Git-Flow如何工作"><a href="#Git-Flow如何工作" class="headerlink" title="Git Flow如何工作"></a>Git Flow如何工作</h4><h4 id="初始分支"><a href="#初始分支" class="headerlink" title="初始分支"></a>初始分支</h4><p>所有在Master分支上的Commit应该Tag</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g87yso01gdj30h2044glr.jpg" alt></p>
+<h4 id="Feature-分支"><a href="#Feature-分支" class="headerlink" title="Feature 分支"></a>Feature 分支</h4><p>分支名 feature/*</p>
+<p>Feature分支做完后，必须合并回Develop分支, 合并完分支后一般会删点这个Feature分支，但是我们也可以保留</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g87ysrtwikj30h207g3yz.jpg" alt></p>
+<h4 id="Release分支"><a href="#Release分支" class="headerlink" title="Release分支"></a>Release分支</h4><p>分支名 release/*</p>
+<p>Release分支基于Develop分支创建，打完Release分之后，我们可以在这个Release分支上测试，修改Bug等。同时，其它开发人员可以基于开发新的Feature (记住：一旦打了Release分支之后不要从Develop分支上合并新的改动到Release分支)</p>
+<p>发布Release分支时，合并Release到Master和Develop， 同时在Master分支上打个Tag记住Release版本号，然后可以删除Release分支了。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g87ysygdm3j30h208w0tc.jpg" alt></p>
+<h4 id="维护分支-Hotfix"><a href="#维护分支-Hotfix" class="headerlink" title="维护分支 Hotfix"></a>维护分支 Hotfix</h4><p>分支名 hotfix/*</p>
+<p>hotfix分支基于Master分支创建，开发完后需要合并回Master和Develop分支，同时在Master上打一个tag</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g87yt25rc1j30h20akaat.jpg" alt></p>
+<h4 id="Git-Flow代码示例"><a href="#Git-Flow代码示例" class="headerlink" title="Git Flow代码示例"></a>Git Flow代码示例</h4><p>a. 创建develop分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch develop</span><br><span class="line">git push -u origin develop</span><br></pre></td></tr></table></figure>
+
+<p>b. 开始新Feature开发</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b some-feature develop</span><br><span class="line"><span class="comment"># Optionally, push branch to origin:</span></span><br><span class="line">git push -u origin some-feature    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 做一些改动    </span></span><br><span class="line">git status</span><br><span class="line">git add some-file</span><br><span class="line">git commit</span><br></pre></td></tr></table></figure>
+
+<p>c. 完成Feature</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 合并feature到dev</span></span><br><span class="line">git pull origin develop</span><br><span class="line">git checkout develop</span><br><span class="line">git merge --no-ff some-feature</span><br><span class="line">git push origin develop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地feature</span></span><br><span class="line">git branch -d some-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远端feature</span></span><br><span class="line">git push origin --delete some-feature</span><br></pre></td></tr></table></figure>
+
+<p>d. 开始Relase（test分支）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b release-0.1.0 develop</span><br><span class="line"></span><br><span class="line"><span class="comment"># Optional: Bump version number, commit</span></span><br><span class="line"><span class="comment"># Prepare release, commit</span></span><br></pre></td></tr></table></figure>
+
+<p>e. 完成Release</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 合并到master</span></span><br><span class="line">git checkout master</span><br><span class="line">git merge --no-ff release-0.1.0</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line"><span class="comment">#合并到dev</span></span><br><span class="line">git checkout develop</span><br><span class="line">git merge --no-ff release-0.1.0</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地release</span></span><br><span class="line">git branch -d release-0.1.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远端release</span></span><br><span class="line">git push origin --delete release-0.1.0   </span><br><span class="line"></span><br><span class="line"><span class="comment"># master打标记</span></span><br><span class="line">git tag -a v0.1.0 master</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+
+<p>f. 开始Hotfix（bugfix分支）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hotfix-0.1.1 master</span><br></pre></td></tr></table></figure>
+
+<p>g. 完成Hotfix</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 合并到master</span></span><br><span class="line">git checkout master</span><br><span class="line">git merge --no-ff hotfix-0.1.1</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并到dev</span></span><br><span class="line">git checkout develop</span><br><span class="line">git merge --no-ff hotfix-0.1.1</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地hotfix</span></span><br><span class="line">git branch -d hotfix-0.1.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为本次bug修改打标记</span></span><br><span class="line">git tag -a v0.1.1 master</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://tomatoro.cn/archives/f33d987.html" data-id="cli141lf30003tc8it3cwv0ef"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/archives/96d8af1a.html" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            Nginx常用命令
+          
+        </div>
+      </a>
+    
+    
+      <a href="/archives/d57ffb29.html" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Node学习笔记01</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+<div class="vcomments" id="vcomments"></div>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz',
+		appKey: 'MKI3gklnGb5sVCOEUmibUD6g',
+		notify: 'true',
+		verify: 'true',
+		avatar: 'mp',
+		pageSize: '10',
+		placeholder: '请输入...'
+	})
+</script>
+
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>I Love You Three Thousand Times ! <i class="fe fe-heart-o"></i></li>
+      <li><a href="https://github.com/Tomatoro/Tomatoro.github.io">Tomatoro</a> &copy; 2023</li>
+      <!-- <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/blank-logo.svg" alt="Tomatoro"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">文章</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">类别</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">标签</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

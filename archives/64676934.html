@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="前端,网站搭建,域名注册,博客搭建,JavaScript,CSS,HTML,Vue,Blog.">
+  
+  
+    <meta name="description" content="It&#39;s Tomatoro&#39;s Blog,分享技术,分享快乐!">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+      Git stash 暂存的操作 |
+    
+      Tomatoro
+    </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-git-stash-暂存的操作" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git stash 暂存的操作
+    </h1>
+  
+  
+  <div class="article-normal">
+    <i class="fe fe-book"></i>
+  </>
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/archives/64676934.html" class="article-date">
+  <time datetime="2019-08-30T16:12:55.000Z" itemprop="datePublished">2019-08-30</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><blockquote>
+<p>我们在多人开发的时候,经常遇到开发某一个分支时,需要处理其他分支的事情. 这时就可以暂存手头的工作,切到其它分支,进行工作. 完事后再接回原来的分支并恢复之前的内容, 继续工作 Cool!</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="1-暂存操作"><a href="#1-暂存操作" class="headerlink" title="1. 暂存操作"></a>1. 暂存操作</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status  <span class="comment">// 查看当前状态</span></span><br><span class="line"></span><br><span class="line">git add . <span class="comment">// 如果有修改,添加修改文件</span></span><br><span class="line"></span><br><span class="line">git stash save <span class="string">'本次暂存的标识名字'</span> <span class="comment">// 暂存操作</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-查看当前暂存的记录"><a href="#2-查看当前暂存的记录" class="headerlink" title="2. 查看当前暂存的记录"></a>2. 查看当前暂存的记录</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list <span class="comment">// 查看记录</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-恢复暂存的工作"><a href="#3-恢复暂存的工作" class="headerlink" title="3. 恢复暂存的工作"></a>3. 恢复暂存的工作</h3><blockquote>
+<p>pop命令恢复,恢复后,暂存区域会删除当前的记录</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop stash@&#123;index&#125;  <span class="comment">// 恢复指定的暂存工作, 暂存记录保存在list内,需要通过list索引index取出恢复</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>apply命令恢复,恢复后,暂存区域会保留当前的记录</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply stash@&#123;index&#125; <span class="comment">// 恢复指定的暂存工作, 暂存记录保存在list内,需要通过list索引index取出恢复</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-删除暂存"><a href="#4-删除暂存" class="headerlink" title="4. 删除暂存"></a>4. 删除暂存</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash drop stash@&#123;index&#125; <span class="comment">// 删除某个暂存, 暂存记录保存在list内,需要通过list索引index取出恢复</span></span><br><span class="line"></span><br><span class="line">git stash clear <span class="comment">// 删除全部暂存</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://tomatoro.cn/archives/64676934.html" data-id="cli141lfq000ptc8ibb72q7po"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/archives/a2d3386.html" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            Git worktree 的使用
+          
+        </div>
+      </a>
+    
+    
+      <a href="/archives/fafa2f28.html" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">【转】为什么我喜欢JavaScript的Optional Chaining</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+<div class="vcomments" id="vcomments"></div>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz',
+		appKey: 'MKI3gklnGb5sVCOEUmibUD6g',
+		notify: 'true',
+		verify: 'true',
+		avatar: 'mp',
+		pageSize: '10',
+		placeholder: '请输入...'
+	})
+</script>
+
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>I Love You Three Thousand Times ! <i class="fe fe-heart-o"></i></li>
+      <li><a href="https://github.com/Tomatoro/Tomatoro.github.io">Tomatoro</a> &copy; 2023</li>
+      <!-- <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/blank-logo.svg" alt="Tomatoro"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">文章</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">类别</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">标签</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

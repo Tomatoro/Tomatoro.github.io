@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="前端,网站搭建,域名注册,博客搭建,JavaScript,CSS,HTML,Vue,Blog.">
+  
+  
+    <meta name="description" content="It&#39;s Tomatoro&#39;s Blog,分享技术,分享快乐!">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+      Git worktree 的使用 |
+    
+      Tomatoro
+    </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="/js/pace.min.js"></script>
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-git-worktree-的使用" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git worktree 的使用
+    </h1>
+  
+  
+  <div class="article-normal">
+    <i class="fe fe-book"></i>
+  </>
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/archives/a2d3386.html" class="article-date">
+  <time datetime="2019-08-30T16:23:59.000Z" itemprop="datePublished">2019-08-30</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><blockquote>
+<p>在同一个 git 仓库中，有时候会遇到这样的情况, 你将你分支的代码开发好了,正在运行代码测试. 这时候你接到一个任务–&gt;主分支上有一个bug需要立刻处理. 而你的代码测试已经跑了一大半了, 你不想结束这个测试, 但还必须去主分支上修改这个BUG, 这时候git stash的暂存明显是不能用的, 而重新clone一个新的项目下来有显得很麻烦. 这时候就是Git WorkTree 大展身手的时候了</p>
+</blockquote>
+<p><code>git</code> 从 2.6.0 的版本开始增加了新的指令，可以用来解决这个问题，就是：</p>
+<h5 id="git-worktree"><a href="#git-worktree" class="headerlink" title="git worktree"></a><code>git worktree</code></h5><a id="more"></a>
+
+<p>一个 <code>git</code> 仓库默认有一个 <code>worktree</code>，当需要在同一个仓库兼顾两个或者多个分支的开发时，可以为每一个分支新建一个 <code>worktree</code> 。他们彼此之间不会相互影响，其表现相当于在一个其他的目录重新 <code>git clone</code> 了一把这个 <code>git</code> 仓库。实际上与重建目录不同的是，他们彼此之间又有关联，任何一个 <code>worktree</code> 的提交都会无痛增加到其他的 <code>worktree</code> ，而不需要通过远程仓库做同步。一个分支的工作结束之后，删除那个分支对应的目录即可关闭这个 <code>worktree</code>。总之就是，看来还算完美的一个解决方案。</p>
+<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><h5 id="git-worktree-add-lt-path-gt-lt-branch-gt-："><a href="#git-worktree-add-lt-path-gt-lt-branch-gt-：" class="headerlink" title="git worktree add &lt;path&gt; [&lt;branch&gt;]："></a><code>git worktree add &lt;path&gt; [&lt;branch&gt;]</code>：</h5><p>增加一个新的 <code>worktree</code> ，并指定了其关联的目录是 <code>path</code> ，关联的分支是 <code>&lt;branch&gt;</code> 。后者是一个可选项，默认值是 <code>HEAD</code> 分支。如果 <code>&lt;branch&gt;</code> 已经被关联到了一个 <code>worktree</code> ，则这次 add 会被拒绝执行，可以通过增加 <code>-f | --force</code> 选项来强制执行。</p>
+<p>同时，可以使用 <code>-b &lt;new-branch&gt;</code> 基于 <code>&lt;branch&gt;</code> 新建分支并使这个新分支关联到这个新的 <code>worktree</code> 。如果 <code>&lt;new-branch&gt;</code> 已经存在，则这次 <code>add</code> 会被拒绝，可以使用 <code>-B</code> 代替这里的 <code>-b</code> 来强制执行，则原来的 <code>&lt;new-branch&gt;</code> 的提交进度会被重置为和 <code>&lt;branch&gt;</code> 一样的位置。</p>
+<h5 id="git-worktree-list"><a href="#git-worktree-list" class="headerlink" title="git worktree list :"></a><code>git worktree list</code> :</h5><p>列出当前仓库已经存在的所有 <code>worktree</code> 的详细情况，包括每个 <code>worktree</code> 的关联目录，当前的提交点的哈希码和当前 <code>checkout</code> 到的关联分支。若没有关联分支，则是 <code>detached HEAD</code> 。</p>
+<p>可以增加 <code>--porcelain</code> 选项，用来改变显示风格。即：使用 <code>label</code> 对应 <code>value</code> 的形式显示上面提到的内容。举例容易看出其中差别：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git worktree list</span><br><span class="line">/path/to/bare-source            (bare)</span><br><span class="line">/path/to/linked-worktree        abcd1234 [master]</span><br><span class="line">/path/to/other-linked-worktree  1234abc  (detached HEAD)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git worktree list --porcelain</span><br><span class="line">worktree /path/to/bare-source</span><br><span class="line">bare</span><br><span class="line">​</span><br><span class="line">worktree /path/to/linked-worktree</span><br><span class="line">HEAD abcd1234abcd1234abcd1234abcd1234abcd1234</span><br><span class="line">branch refs/heads/master</span><br><span class="line">​</span><br><span class="line">worktree /path/to/other-linked-worktree</span><br><span class="line">HEAD 1234abc1234abc1234abc1234abc1234abc1234a</span><br><span class="line">detached</span><br></pre></td></tr></table></figure>
+
+<h5 id="prune"><a href="#prune" class="headerlink" title="prune :"></a><code>prune</code> :</h5><p>在删除 <code>worktree</code> 的关联目录之后，清除 <code>worktree</code> 的信息。从而使一个 <code>worktree</code> 完整的删除。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h5 id="git-worktree-lock"><a href="#git-worktree-lock" class="headerlink" title="git worktree lock :"></a><code>git worktree lock</code> :</h5><p><code>git</code> 会定期的自动清除掉已经没有关联目录的那些 <code>worktree</code> 的信息。当你把一个 <code>worktree</code> 的关联目录创建到了一个可移动设备或者一块不是永久挂载的硬盘里的时候，使用这个命令可以防止这个 <code>worktree</code> 的信息被移除。</p>
+<h5 id="git-worktree-unlock"><a href="#git-worktree-unlock" class="headerlink" title="git worktree unlock :"></a><code>git worktree unlock</code> :</h5><p>与上面的命令是一对。作用是解除锁定。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>看起来只是把 <code>git</code> 的文档大概翻译了一下，写一遍加深理解吧。也是刚开始使用的新命令，设计也是很稳重的，没有那么多花哨，没什么好的技巧可谈，但绝对是五星推荐的好用。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://link.jianshu.com?t=https%3A%2F%2Fgit-scm.com%2Fdocs%2Fgit-worktree" target="_blank" rel="noopener">git worktree</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://tomatoro.cn/archives/a2d3386.html" data-id="cli141lfr000rtc8id123hl8x"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/archives/d57ffb29.html" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            Node学习笔记01
+          
+        </div>
+      </a>
+    
+    
+      <a href="/archives/64676934.html" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Git stash 暂存的操作</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+<div class="vcomments" id="vcomments"></div>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: 'CQjPHxXIXJ8mFQSCGnYpt0vt-gzGzoHsz',
+		appKey: 'MKI3gklnGb5sVCOEUmibUD6g',
+		notify: 'true',
+		verify: 'true',
+		avatar: 'mp',
+		pageSize: '10',
+		placeholder: '请输入...'
+	})
+</script>
+
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>I Love You Three Thousand Times ! <i class="fe fe-heart-o"></i></li>
+      <li><a href="https://github.com/Tomatoro/Tomatoro.github.io">Tomatoro</a> &copy; 2023</li>
+      <!-- <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/blank-logo.svg" alt="Tomatoro"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">文章</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/categories">类别</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/tags">标签</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
